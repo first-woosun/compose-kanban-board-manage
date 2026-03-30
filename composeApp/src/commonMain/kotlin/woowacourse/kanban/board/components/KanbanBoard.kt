@@ -54,7 +54,7 @@ fun KanbanBoard(
             progress = state.progress,
             doneTaskCount = state.doneCardList.size,
             totalTaskCount = state.totalTaskCount,
-            onClick = { state.showDialog.value = true },
+            onClick = { state.toggleDialog() },
             headerTitle = project.title,
         )
         Row(
@@ -102,9 +102,9 @@ fun KanbanBoard(
         }
     }
 
-    if (state.showDialog.value) {
+    if (state.showDialogValue()) {
         TaskCreateDialog(
-            onDismiss = { state.showDialog.value = false },
+            onDismiss = { state.toggleDialog() },
             onCreateTask = { task ->
                 state.addTask(task)
                 state.showKanbanSnackBar(SnackBarText.CREATE_TASK)

@@ -32,7 +32,13 @@ class BoardState(
         if (totalTasks.isEmpty()) 0.0 else doneCardList.size.toDouble() / totalTasks.size.toDouble()
     }
 
-    val showDialog = mutableStateOf(false)
+    private val showDialog = mutableStateOf(false)
+
+    fun showDialogValue() = showDialog.value
+
+    fun toggleDialog(){
+        showDialog.value = !showDialog.value
+    }
 
     fun addTask(inputTask: KanbanTask) {
         totalTasks.add(inputTask)
