@@ -131,6 +131,9 @@ fun TaskCreateDialog(
 
 @Preview
 @Composable
-fun TaskCreateDialog() {
-    TaskCreateDialog()
+fun TaskCreateDialogPreview() {
+    TaskCreateDialog(
+        onDismiss = { },
+        onCreateTask = { }
+    )
 }
