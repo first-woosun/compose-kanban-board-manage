@@ -20,7 +20,7 @@ class BoardState(
         addAll(project)
     }
 
-    val totalTaskCount by derivedStateOf { totalTasks.size }
+    val totalTaskCount: Int get() = totalTasks.size
 
     val todoCardList: List<KanbanTask> by derivedStateOf { totalTasks.filter { task -> task.status == TaskStatus.TO_DO } }
 
