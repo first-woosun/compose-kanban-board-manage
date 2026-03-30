@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +20,6 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.constant.MockData
-import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.create.TaskCreateDialog
@@ -48,6 +48,12 @@ fun KanbanBoard(
     var draggedTask by remember { mutableStateOf<KanbanTask?>(null) }
     var currentDragPosition by remember { mutableStateOf<Offset?>(null) }
     val columnBounds = remember { mutableStateMapOf<TaskStatus, Rect>() }
+
+    LaunchedEffect(state.snackBarEvent) {
+        state.snackBarEvent?.let {
+            snackbarHostState.showSnackbar(it.message)
+        }
+    }
 
     Column(modifier = modifier) {
         KanbanBoardHeader(
@@ -85,8 +91,7 @@ fun KanbanBoard(
                             if (targetStatus != null && task.status != targetStatus) {
                                 val idx = state.totalTasksGetter().indexOfFirst { it.data.id == task.data.id }
                                 if (idx != -1) {
-                                    state.totalTasksGetter()[idx] = state.totalTasksGetter()[idx].copy(status = targetStatus)
-                                    state.showKanbanSnackBar(SnackBarText.EDIT_TASK)
+                                    state.changeTask(targetStatus, idx)
                                 }
                             }
                         }
@@ -107,7 +112,6 @@ fun KanbanBoard(
             onDismiss = { state.toggleDialog() },
             onCreateTask = { task ->
                 state.addTask(task)
-                state.showKanbanSnackBar(SnackBarText.CREATE_TASK)
             },
             assignees = MockData.ASSIGNEES,
             modifier = Modifier,

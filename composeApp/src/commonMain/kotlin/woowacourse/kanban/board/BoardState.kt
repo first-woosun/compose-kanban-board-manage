@@ -5,8 +5,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import woowacourse.kanban.board.constant.SnackBarText
+import woowacourse.kanban.board.utils.SnackBarEvent
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
@@ -40,8 +43,21 @@ class BoardState(
         showDialog.value = !showDialog.value
     }
 
+    var snackBarEvent by mutableStateOf<SnackBarEvent?>(null)
+        private set
+
+    private fun snackBarTrigger(message: String) {
+        snackBarEvent = SnackBarEvent(message = message)
+    }
+
     fun addTask(inputTask: KanbanTask) {
         totalTasks.add(inputTask)
+        snackBarTrigger(SnackBarText.CREATE_TASK)
+    }
+
+    fun changeTask(newStatus: TaskStatus, index: Int) {
+        totalTasks[index] = totalTasks[index].copy(status = newStatus)
+        snackBarTrigger(SnackBarText.EDIT_TASK)
     }
 
     fun totalTasksGetter(): MutableList<KanbanTask> {

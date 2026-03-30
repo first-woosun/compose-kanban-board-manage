@@ -40,7 +40,7 @@
 - [x] MOCK_PROJECT 불변 리스트로 변경
 - [x] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
 - [x] showDialog 필드는 외부에서 자유롭게 변경되어도 괜찮은가?
-- [ ] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
+- [x] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
 - [x] LazyColumn에서 index를 써야만 아이템을 그릴 수 있는가?
 - [x] TaskCreateDialog 프리뷰 함수
 - [x] TaskCreateDialog Modifier 파라밑터 기본값 지정
