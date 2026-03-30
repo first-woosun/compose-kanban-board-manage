@@ -42,11 +42,11 @@ fun KanbanSidebar(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier.padding(16.dp),
         ) {
-            items(projects.size) { index ->
+            items(projects.size) {
                 ProjectItem(
-                    projects[index].title,
-                    isSelected = selectedProjectIndex == index,
-                    onClick = { onClick(index) },
+                    projects[it].title,
+                    isSelected = selectedProjectIndex == it,
+                    onClick = { onClick(it) },
                 )
             }
         }
