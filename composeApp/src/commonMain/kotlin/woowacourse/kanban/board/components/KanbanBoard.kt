@@ -22,7 +22,6 @@ import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
-import woowacourse.kanban.domain.task.TaskManager
 import woowacourse.kanban.create.TaskCreateDialog
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
@@ -44,8 +43,7 @@ fun KanbanBoard(
 ) {
     val scope = rememberCoroutineScope()
 
-    val state = remember(project) { BoardState(scope, project, snackbarHostState) }
-    val action = remember(state) { TaskManager(project.tasks) }
+    val state = remember(project) { BoardState(scope, project.project, snackbarHostState) }
 
     var draggedTask by remember { mutableStateOf<KanbanTask?>(null) }
     var currentDragPosition by remember { mutableStateOf<Offset?>(null) }
@@ -108,7 +106,7 @@ fun KanbanBoard(
         TaskCreateDialog(
             onDismiss = { state.showDialog.value = false },
             onCreateTask = { task ->
-                action.addTask(task)
+                state.addTask(task)
                 state.showKanbanSnackBar(SnackBarText.CREATE_TASK)
             },
             assignees = MockData.ASSIGNEES,

@@ -3,20 +3,22 @@ package woowacourse.kanban.board
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
 class BoardState(
     private val scope: CoroutineScope,
-    project: KanbanProject,
+    project: List<KanbanTask>,
     private val snackBarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
 
-    private val totalTasks: MutableList<KanbanTask> = project.tasks
+    private val totalTasks = mutableStateListOf<KanbanTask>().apply {
+        addAll(project)
+    }
 
     val totalTaskCount by derivedStateOf { totalTasks.size }
 
@@ -31,6 +33,10 @@ class BoardState(
     }
 
     val showDialog = mutableStateOf(false)
+
+    fun addTask(inputTask: KanbanTask) {
+        totalTasks.add(inputTask)
+    }
 
     fun totalTasksGetter(): MutableList<KanbanTask> {
         return totalTasks
