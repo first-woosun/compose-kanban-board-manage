@@ -35,7 +35,7 @@
 
 ## 1차 피드백
 - [x] 패키지 구조 수정
-- [ ] 함수 반환타입 불변 리스트로 변경
+- [x] 함수 반환타입 불변 리스트로 변경
 - [x] TaskCreateAction 제거
 - [ ] ASSIGNEES는 val인데 MOCK_PROJECT는 var인 이유
 - [ ] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
