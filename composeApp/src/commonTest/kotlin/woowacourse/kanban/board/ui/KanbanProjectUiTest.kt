@@ -34,7 +34,7 @@ class KanbanProjectUiTest {
 
     @Test
     fun `프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다`() = runComposeUiTest {
-        // given : 칸반 페이지가 주어지고 프로젝트 리스트는 칸반 페이지 내부에 MockData로 설정 되어 있다
+        // given : 칸반 페이지가 생성된다.
         setContent {
             KanbanPage(projects = MockData.MOCK_PROJECTS)
         }
@@ -51,7 +51,7 @@ class KanbanProjectUiTest {
 
     @Test
     fun `프로젝트를 선택하면 보드의 제목이 변경되어야 한다`() = runComposeUiTest {
-        // given : 칸반 페이지가 주어지고 프로젝트 리스트는 칸반 페이지 내부에 MockData로 설정 되어 있다
+        // given : 칸반 페이지가 생성된다.
         setContent {
             KanbanPage(projects = MockData.MOCK_PROJECTS)
         }
@@ -88,7 +88,7 @@ class KanbanProjectUiTest {
 
     @Test
     fun `상태를 변경 했을 때 스낵바가 출력되어야 한다`() = runComposeUiTest {
-        // given : snackBarHostState를 설정한 Scaffold와 BoardAction가 주어진다.
+        // given : snackBarHostState를 설정한 Scaffold와 BoardStateHolder, Mock 데이터가 주어진다.
         val project = MockData.MOCK_PROJECTS.first()
 
         lateinit var state: BoardState
