@@ -1,15 +1,13 @@
 package woowacourse.kanban.board.model
 
-import androidx.compose.material3.SnackbarHostState
 import kotlin.test.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import woowacourse.kanban.board.BoardState
-import woowacourse.kanban.domain.project.KanbanProject
-import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
 
@@ -51,7 +49,7 @@ class KanbanProjectTest {
             project = listOf(task),
         )
 
-        state.changeTask( TaskStatus.DONE, 0)
+        state.changeTask(TaskStatus.DONE, 0)
 
         assertEquals(TaskStatus.DONE, state.totalTasksGetter().first().status)
     }

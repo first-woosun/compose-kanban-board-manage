@@ -31,7 +31,7 @@ fun StatusButton(
     status: TaskStatus,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isSelected: Boolean = false,
+    isSelected: Boolean = false
 ) {
 
     val shape = RoundedCornerShape(10.dp)

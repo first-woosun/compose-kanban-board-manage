@@ -30,7 +30,7 @@ fun CoachButton(
     isSelected: Boolean,
     assignee: Assignee,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(10.dp)
 

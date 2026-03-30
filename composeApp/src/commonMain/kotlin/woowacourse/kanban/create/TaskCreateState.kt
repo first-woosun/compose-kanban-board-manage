@@ -12,7 +12,7 @@ import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
 
-class TaskCreateState() {
+class TaskCreateState {
     var titleInputValue by mutableStateOf("")
         private set
     var contentInputValue by mutableStateOf("")
@@ -82,7 +82,7 @@ class TaskCreateState() {
                 ),
                 nickname = assignee.nickname,
             ),
-            status = TaskStatus.entries[selectedStatusIndex]
+            status = TaskStatus.entries[selectedStatusIndex],
         )
     }
 }

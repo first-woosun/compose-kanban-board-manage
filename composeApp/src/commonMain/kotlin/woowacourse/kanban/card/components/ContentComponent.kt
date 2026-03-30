@@ -9,10 +9,7 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.core.design.Colors
 
 @Composable
-fun Content(
-    content: String,
-    modifier: Modifier = Modifier,
-) {
+fun Content(content: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
     ) {

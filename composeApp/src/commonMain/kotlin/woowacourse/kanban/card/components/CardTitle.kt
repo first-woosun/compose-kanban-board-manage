@@ -9,10 +9,7 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.domain.task.Title
 
 @Composable
-fun CardTitle(
-    title: Title,
-    modifier: Modifier = Modifier,
-) {
+fun CardTitle(title: Title, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
     ) {

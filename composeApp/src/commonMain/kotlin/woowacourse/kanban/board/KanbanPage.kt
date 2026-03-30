@@ -25,7 +25,7 @@ import woowacourse.kanban.domain.project.KanbanProject
 fun KanbanPage(
     modifier: Modifier = Modifier,
     projects: List<KanbanProject> = MockData.MOCK_PROJECTS,
-    snackbarHostState: SnackbarHostState = SnackbarHostState()
+    snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
     var selectedProject by remember { mutableStateOf(projects.first()) }
     var selectedProjectIndex by remember { mutableIntStateOf(0) }

@@ -27,7 +27,7 @@ fun ProjectItem(
     projectTitle: String,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
 
     val bgColor = if (isSelected) Colors.SecondarySelectedBg else Color.Transparent

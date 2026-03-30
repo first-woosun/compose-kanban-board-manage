@@ -20,10 +20,7 @@ import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.domain.task.Nickname
 
 @Composable
-fun Profile(
-    nickname: Nickname,
-    modifier: Modifier = Modifier,
-) {
+fun Profile(nickname: Nickname, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(6.dp),

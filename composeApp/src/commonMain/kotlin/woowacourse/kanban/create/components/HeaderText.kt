@@ -8,9 +8,6 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.core.design.Colors
 
 @Composable
-fun HeaderText(
-    title: String,
-    modifier: Modifier = Modifier,
-) {
+fun HeaderText(title: String, modifier: Modifier = Modifier) {
     Text(title, fontWeight = FontWeight.W500, fontSize = 14.sp, color = Colors.PrimaryText, modifier = modifier)
 }

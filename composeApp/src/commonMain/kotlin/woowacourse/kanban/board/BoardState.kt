@@ -1,21 +1,16 @@
 package woowacourse.kanban.board
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.utils.SnackBarEvent
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
-class BoardState(
-    project: List<KanbanTask>,
-) {
+class BoardState(project: List<KanbanTask>) {
 
     private val totalTasks = mutableStateListOf<KanbanTask>().apply {
         addAll(project)
@@ -37,7 +32,7 @@ class BoardState(
 
     fun showDialogValue() = showDialog.value
 
-    fun toggleDialog(){
+    fun toggleDialog() {
         showDialog.value = !showDialog.value
     }
 

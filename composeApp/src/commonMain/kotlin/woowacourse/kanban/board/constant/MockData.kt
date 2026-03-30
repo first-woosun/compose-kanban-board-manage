@@ -2,10 +2,10 @@ package woowacourse.kanban.board.constant
 
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
-import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
 

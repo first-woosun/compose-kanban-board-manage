@@ -11,10 +11,7 @@ import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.domain.task.Tags
 
 @Composable
-fun TagsComponent(
-    tags: Tags,
-    modifier: Modifier = Modifier,
-) {
+fun TagsComponent(tags: Tags, modifier: Modifier = Modifier) {
     FlowRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),

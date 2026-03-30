@@ -23,10 +23,7 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.core.design.Colors
 
 @Composable
-fun KanbanSnackBar(
-    data: SnackbarData,
-    modifier: Modifier = Modifier,
-) {
+fun KanbanSnackBar(data: SnackbarData, modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier

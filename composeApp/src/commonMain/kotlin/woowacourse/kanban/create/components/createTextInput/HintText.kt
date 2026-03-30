@@ -13,7 +13,7 @@ import woowacourse.kanban.core.design.Colors
 fun HintText(
     hintText: String,
     modifier: Modifier = Modifier,
-    isErrorText: Boolean = false,
+    isErrorText: Boolean = false
 ) {
     Text(
         hintText,

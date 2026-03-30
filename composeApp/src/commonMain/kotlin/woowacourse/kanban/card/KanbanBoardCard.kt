@@ -26,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.card.components.CardTitle
 import woowacourse.kanban.card.components.Content
 import woowacourse.kanban.card.components.Profile
@@ -37,9 +36,10 @@ import woowacourse.kanban.card.constant.DEFAULT_TITLE
 import woowacourse.kanban.card.constant.MAX_CONTENT
 import woowacourse.kanban.card.constant.MAX_NAME
 import woowacourse.kanban.card.constant.MAX_TITLE
-import woowacourse.kanban.domain.task.TaskData
+import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.Title
 
 @Composable
@@ -90,14 +90,14 @@ fun KanbanCard(
             // 제목
             CardTitle(
                 title = board.title,
-                modifier = Modifier.padding(vertical = 8.dp).testTag("제목")
+                modifier = Modifier.padding(vertical = 8.dp).testTag("제목"),
             )
 
             // 중간 내용
             if (board.content.isNotBlank()) {
                 Content(
                     content = board.content,
-                    modifier = Modifier.padding(vertical = 4.dp).testTag("중간내용")
+                    modifier = Modifier.padding(vertical = 4.dp).testTag("중간내용"),
                 )
             }
 
@@ -105,7 +105,7 @@ fun KanbanCard(
             if (board.tags.tags.isNotEmpty()) {
                 TagsComponent(
                     tags = board.tags,
-                    modifier = Modifier.padding(vertical = 8.dp).testTag("테그목록")
+                    modifier = Modifier.padding(vertical = 8.dp).testTag("테그목록"),
                 )
             }
 
@@ -115,7 +115,7 @@ fun KanbanCard(
             // 작성자
             Profile(
                 nickname = board.nickname,
-                modifier = Modifier.padding(vertical = 8.dp).testTag("프로필")
+                modifier = Modifier.padding(vertical = 8.dp).testTag("프로필"),
             )
         }
     }

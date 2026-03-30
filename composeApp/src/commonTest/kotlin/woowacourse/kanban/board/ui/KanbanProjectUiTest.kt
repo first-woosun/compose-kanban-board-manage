@@ -1,13 +1,10 @@
 package woowacourse.kanban.board.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assert
@@ -18,15 +15,13 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
-import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.KanbanPage
-import woowacourse.kanban.board.components.KanbanSidebar
-import woowacourse.kanban.board.components.KanbanSnackBar
 import kotlin.test.Test
+import woowacourse.kanban.board.BoardState
+import woowacourse.kanban.board.KanbanPage
+import woowacourse.kanban.board.components.KanbanBoard
+import woowacourse.kanban.board.components.KanbanSidebar
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
-import woowacourse.kanban.board.BoardState
-import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.domain.task.TaskStatus
 
 @OptIn(ExperimentalTestApi::class)
@@ -98,20 +93,18 @@ class KanbanProjectUiTest {
             snackbarHostState = remember { SnackbarHostState() }
             state = remember { BoardState(project.project) }
 
-            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) })
-            { paddingValues ->
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
                     boardState = state,
                     snackbarHostState = snackbarHostState,
-                    modifier = Modifier.padding(paddingValues)
+                    modifier = Modifier.padding(paddingValues),
                 )
             }
         }
 
         // when : 상태 변경 함수를 호출했을 때
         state.changeTask(newStatus = TaskStatus.DONE, 0)
-
 
         // then : "태스크가 이동되었습니다" 스낵바가 출력되어야 한다.
         onNodeWithText(SnackBarText.EDIT_TASK, useUnmergedTree = true).assertExists()

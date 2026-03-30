@@ -24,7 +24,7 @@ fun FooterRow(
     onCancel: () -> Unit,
     onCreate: () -> Unit,
     isCreateError: Boolean,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),

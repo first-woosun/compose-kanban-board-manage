@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
@@ -14,9 +13,9 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.unit.dp
+import kotlin.test.Test
 import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.board.components.KanbanSnackBar
-import kotlin.test.Test
 import woowacourse.kanban.domain.project.KanbanProject
 
 @OptIn(ExperimentalTestApi::class)

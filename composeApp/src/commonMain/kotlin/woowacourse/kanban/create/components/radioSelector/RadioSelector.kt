@@ -15,7 +15,7 @@ fun RadioSelector(
     header: String,
     listSize: Int,
     modifier: Modifier = Modifier,
-    itemContent: @Composable (index: Int) -> Unit,
+    itemContent: @Composable (index: Int) -> Unit
 ) {
 
     Column(modifier) {
