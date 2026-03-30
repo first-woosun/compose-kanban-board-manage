@@ -23,7 +23,7 @@ object MockData {
         ),
     )
 
-    var MOCK_PROJECTS = mutableListOf(
+    val MOCK_PROJECTS = listOf(
         KanbanProject(
             title = "Compose1",
             inputTasks = mutableListOf(

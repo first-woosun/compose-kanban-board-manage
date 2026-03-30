@@ -37,7 +37,7 @@
 - [x] 패키지 구조 수정
 - [x] 함수 반환타입 불변 리스트로 변경
 - [x] TaskCreateAction 제거
-- [ ] ASSIGNEES는 val인데 MOCK_PROJECT는 var인 이유
+- [x] MOCK_PROJECT 불변 리스트로 변경
 - [ ] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
 - [ ] showDialog 필드는 외부에서 자유롭게 변경되어도 괜찮은가?
 - [ ] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
