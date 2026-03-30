@@ -45,4 +45,5 @@
 - [x] TaskCreateDialog 프리뷰 함수
 - [x] TaskCreateDialog Modifier 파라밑터 기본값 지정
 - [ ] 테스트 코드의 이름을 좀 더 자명하게 수정해보기
-- [ ] "프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다" KanbanPage 프로젝트 파라미터 추가
+- [x] KanbanPage 프로젝트 파라미터 추가
+- [x] KanbanPage snackbarHostState 파라미터 추가

@@ -19,11 +19,15 @@ import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.board.components.KanbanSidebar
 import woowacourse.kanban.board.components.KanbanSnackBar
 import woowacourse.kanban.board.constant.MockData
+import woowacourse.kanban.domain.project.KanbanProject
 
 @Composable
-fun KanbanPage(modifier: Modifier = Modifier) {
-    val snackbarHostState = SnackbarHostState()
-    var selectedProject by remember { mutableStateOf(MockData.MOCK_PROJECTS.first()) }
+fun KanbanPage(
+    modifier: Modifier = Modifier,
+    projects: List<KanbanProject> = MockData.MOCK_PROJECTS,
+    snackbarHostState: SnackbarHostState = SnackbarHostState()
+) {
+    var selectedProject by remember { mutableStateOf(projects.first()) }
     var selectedProjectIndex by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -36,11 +40,11 @@ fun KanbanPage(modifier: Modifier = Modifier) {
     ) { innerPadding ->
         Row(modifier = Modifier.padding(innerPadding)) {
             KanbanSidebar(
-                MockData.MOCK_PROJECTS,
+                projects,
                 selectedProjectIndex = selectedProjectIndex,
                 onClick = { index ->
                     selectedProjectIndex = index
-                    selectedProject = MockData.MOCK_PROJECTS[selectedProjectIndex]
+                    selectedProject = projects[selectedProjectIndex]
                 },
             )
             KanbanBoard(
