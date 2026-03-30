@@ -13,7 +13,7 @@ import woowacourse.kanban.domain.task.Title
 
 class BoardStateTest {
     @Test
-    fun `전체 태스크 중 Done 상태의 비율로 완료율을 계산해야 한다`() = runTest {
+    fun `전체 태스크가 4개이고 DONE 상태인 태스크가 2개일 때 완료율은 50%다`() = runTest {
         // given : Done 상태 태스크 2개, To Do 상태 태스크 1개, In Progress 상태 태스크 1개
         val tasks = listOf(
             KanbanTask(
