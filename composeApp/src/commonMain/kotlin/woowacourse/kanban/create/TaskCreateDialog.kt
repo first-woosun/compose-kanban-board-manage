@@ -29,7 +29,7 @@ import woowacourse.kanban.domain.task.TaskStatus
 fun TaskCreateDialog(
     onDismiss: () -> Unit,
     onCreateTask: (task: KanbanTask) -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     assignees: List<Assignee> = emptyList(),
 ) {
     val state = remember { TaskCreateState() }

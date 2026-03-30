@@ -43,6 +43,6 @@
 - [ ] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
 - [ ] LazyColumn에서 index를 써야만 아이템을 그릴 수 있는가?
 - [ ] TaskCreateDialog 프리뷰 함수
-- [ ] TaskCreateDialog Modifier 파라밑터 기본값 지정
+- [x] TaskCreateDialog Modifier 파라밑터 기본값 지정
 - [ ] 테스트 코드의 이름을 좀 더 자명하게 수정해보기
 - [ ] "프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다" KanbanPage 프로젝트 파라미터 추가
