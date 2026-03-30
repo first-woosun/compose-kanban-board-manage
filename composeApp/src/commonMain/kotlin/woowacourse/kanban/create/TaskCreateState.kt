@@ -5,11 +5,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import woowacourse.kanban.domain.task.TaskCreateAction
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.TaskData
+import woowacourse.kanban.domain.task.TaskStatus
+import woowacourse.kanban.domain.task.Title
 
-class TaskCreateState(private val action: TaskCreateAction = TaskCreateAction()) {
+class TaskCreateState() {
     var titleInputValue by mutableStateOf("")
         private set
     var contentInputValue by mutableStateOf("")
@@ -51,9 +54,8 @@ class TaskCreateState(private val action: TaskCreateAction = TaskCreateAction())
     }
 
     fun onCreateValidate(): Boolean {
-        val result = action.validate(titleInputValue, tagInputValue)
-        isTitleError = result.isTitleError
-        isTagError = result.isTagError
+        isTitleError = titleValidation()
+        isTagError = tagValidation()
 
         if (isTitleError) titleInputValue = ""
         if (isTagError) tagInputValue = ""
@@ -61,13 +63,26 @@ class TaskCreateState(private val action: TaskCreateAction = TaskCreateAction())
         return isTitleError || isTagError
     }
 
+    fun titleValidation(): Boolean {
+        return titleInputValue.isEmpty()
+    }
+
+    fun tagValidation(): Boolean {
+        val tags = tagInputValue.split(",").map { it.trim() }
+        return tags.size > 5 || tags.any { it.length > 5 }
+    }
+
     fun taskCreate(assignee: Assignee): KanbanTask {
-        return action.createTask(
-            title = titleInputValue,
-            content = contentInputValue,
-            tags = tagInputValue,
-            statusIndex = selectedStatusIndex,
-            assignee = assignee,
+        return KanbanTask(
+            data = TaskData(
+                title = Title(titleInputValue),
+                content = contentInputValue,
+                tags = Tags(
+                    if (tagInputValue.isNotBlank()) tagInputValue.split(",").map { it.trim() } else emptyList(),
+                ),
+                nickname = assignee.nickname,
+            ),
+            status = TaskStatus.entries[selectedStatusIndex]
         )
     }
 }

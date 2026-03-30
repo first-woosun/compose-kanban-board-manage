@@ -1,6 +1,6 @@
 package woowacourse.kanban.domain.task
 
-data class BoardData(
+data class TaskData(
     val title: Title,
     val content: String = "",
     val tags: Tags,

@@ -87,11 +87,7 @@ fun KanbanBoard(
                             if (targetStatus != null && task.status != targetStatus) {
                                 val idx = state.totalTasksGetter().indexOfFirst { it.data.id == task.data.id }
                                 if (idx != -1) {
-                                    action.changeStatus(
-                                        task = state.totalTasksGetter()[idx],
-                                        status = targetStatus,
-                                        idx = idx,
-                                    )
+                                    state.totalTasksGetter()[idx] = state.totalTasksGetter()[idx].copy(status = targetStatus)
                                     state.showKanbanSnackBar(SnackBarText.EDIT_TASK)
                                 }
                             }

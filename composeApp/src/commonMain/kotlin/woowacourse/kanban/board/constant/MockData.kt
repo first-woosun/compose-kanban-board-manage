@@ -2,7 +2,7 @@ package woowacourse.kanban.board.constant
 
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
-import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -28,7 +28,7 @@ object MockData {
             title = "Compose1",
             inputTasks = mutableListOf(
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -38,7 +38,7 @@ object MockData {
                     status = TaskStatus.TO_DO,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -48,7 +48,7 @@ object MockData {
                     status = TaskStatus.TO_DO,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -63,7 +63,7 @@ object MockData {
             title = "Compose2",
             inputTasks = mutableListOf(
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -73,7 +73,7 @@ object MockData {
                     status = TaskStatus.IN_PROGRESS,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -83,7 +83,7 @@ object MockData {
                     status = TaskStatus.IN_PROGRESS,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -98,7 +98,7 @@ object MockData {
             title = "compose3 너무너무 길어진 프로젝트 이름",
             inputTasks = mutableListOf(
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -108,7 +108,7 @@ object MockData {
                     status = TaskStatus.DONE,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
@@ -118,7 +118,7 @@ object MockData {
                     status = TaskStatus.DONE,
                 ),
                 KanbanTask(
-                    data = BoardData(
+                    data = TaskData(
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),

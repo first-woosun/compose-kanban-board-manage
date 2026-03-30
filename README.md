@@ -36,7 +36,7 @@
 ## 1차 피드백
 - [x] 패키지 구조 수정
 - [ ] 함수 반환타입 불변 리스트로 변경
-- [ ] Task의 status를 TaskManager에서 변경하고 있음
+- [x] TaskCreateAction 제거
 - [ ] ASSIGNEES는 val인데 MOCK_PROJECT는 var인 이유
 - [ ] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
 - [ ] showDialog 필드는 외부에서 자유롭게 변경되어도 괜찮은가?

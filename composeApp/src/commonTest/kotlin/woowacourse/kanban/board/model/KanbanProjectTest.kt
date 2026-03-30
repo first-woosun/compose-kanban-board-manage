@@ -7,7 +7,7 @@ import org.junit.Test
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.TaskManager
-import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -31,7 +31,7 @@ class KanbanProjectTest {
 
         action.addTask(
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -47,7 +47,7 @@ class KanbanProjectTest {
     @Test
     fun `태스크의 상태를 변경 할 수 있어야 한다`() = runTest {
         var task = KanbanTask(
-            data = BoardData(
+            data = TaskData(
                 title = Title("제목"),
                 content = "내용",
                 tags = Tags(),

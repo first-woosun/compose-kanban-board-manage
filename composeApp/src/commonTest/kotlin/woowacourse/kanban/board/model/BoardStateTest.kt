@@ -7,7 +7,7 @@ import kotlinx.coroutines.test.runTest
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.TaskManager
-import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -20,7 +20,7 @@ class BoardStateTest {
         // given : Done 상태 태스크 2개, To Do 상태 태스크 1개, In Progress 상태 태스크 1개
         val tasks = listOf(
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -29,7 +29,7 @@ class BoardStateTest {
                 status = TaskStatus.DONE,
             ),
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -38,7 +38,7 @@ class BoardStateTest {
                 status = TaskStatus.DONE,
             ),
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -47,7 +47,7 @@ class BoardStateTest {
                 status = TaskStatus.TO_DO,
             ),
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -82,7 +82,7 @@ class BoardStateTest {
         // given : Done 상태 태스크 1개, To Do 상태 태스크 1개, In Progress 상태 태스크 1개가 주어진다
         val tasks = listOf(
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -91,7 +91,7 @@ class BoardStateTest {
                 status = TaskStatus.DONE,
             ),
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
@@ -100,7 +100,7 @@ class BoardStateTest {
                 status = TaskStatus.TO_DO,
             ),
             KanbanTask(
-                data = BoardData(
+                data = TaskData(
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),

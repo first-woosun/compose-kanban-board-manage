@@ -37,14 +37,14 @@ import woowacourse.kanban.card.constant.DEFAULT_TITLE
 import woowacourse.kanban.card.constant.MAX_CONTENT
 import woowacourse.kanban.card.constant.MAX_NAME
 import woowacourse.kanban.card.constant.MAX_TITLE
-import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.Title
 
 @Composable
 fun KanbanCard(
-    board: BoardData,
+    board: TaskData,
     modifier: Modifier = Modifier,
     onDragStart: () -> Unit = {},
     onDragChange: (Offset) -> Unit = {},
@@ -121,31 +121,31 @@ fun KanbanCard(
     }
 }
 
-class BoardPreviewParameterProvider : PreviewParameterProvider<BoardData> {
+class BoardPreviewParameterProvider : PreviewParameterProvider<TaskData> {
     override val values = sequenceOf(
-        BoardData(
+        TaskData(
             title = Title(DEFAULT_TITLE),
             content = DEFAULT_CONTENT,
             tags = Tags(listOf("컴포넌트", "성능")),
             nickname = Nickname(DEFAULT_NAME),
         ),
-        BoardData(
+        TaskData(
             title = Title(DEFAULT_TITLE),
             tags = Tags(listOf("컴포넌트", "성능")),
             nickname = Nickname(DEFAULT_NAME),
         ),
-        BoardData(
+        TaskData(
             title = Title(DEFAULT_TITLE),
             content = DEFAULT_CONTENT,
             tags = Tags(),
             nickname = Nickname(DEFAULT_NAME),
         ),
-        BoardData(
+        TaskData(
             title = Title(DEFAULT_TITLE),
             tags = Tags(),
             nickname = Nickname(DEFAULT_NAME),
         ),
-        BoardData(
+        TaskData(
             title = Title(MAX_TITLE),
             content = MAX_CONTENT,
             tags = Tags(listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임")),
@@ -158,7 +158,7 @@ class BoardPreviewParameterProvider : PreviewParameterProvider<BoardData> {
 @Composable
 private fun BoardScreenView(
     @PreviewParameter(BoardPreviewParameterProvider::class)
-    board: BoardData,
+    board: TaskData,
 ) {
     KanbanCard(
         board,
