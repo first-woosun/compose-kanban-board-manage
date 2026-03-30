@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import woowacourse.kanban.create.components.DialogBar
@@ -20,7 +21,6 @@ import woowacourse.kanban.create.components.createTextInput.CreateTextInput
 import woowacourse.kanban.create.components.radioSelector.CoachButton
 import woowacourse.kanban.create.components.radioSelector.RadioSelector
 import woowacourse.kanban.create.components.radioSelector.StatusButton
-import woowacourse.kanban.create.TaskCreateState
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
@@ -127,4 +127,10 @@ fun TaskCreateDialog(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun TaskCreateDialog() {
+    TaskCreateDialog()
 }
