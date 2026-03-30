@@ -38,11 +38,12 @@ private fun TaskStatus.tasks(state: BoardState): List<KanbanTask> {
 @Composable
 fun KanbanBoard(
     project: KanbanProject,
+    boardState: BoardState = BoardState(project.project),
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
 
-    val state = remember(project) { BoardState(project.project) }
+    val state = remember(project) { boardState }
 
     var draggedTask by remember { mutableStateOf<KanbanTask?>(null) }
     var currentDragPosition by remember { mutableStateOf<Offset?>(null) }

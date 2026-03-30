@@ -49,6 +49,7 @@ fun KanbanPage(
             )
             KanbanBoard(
                 project = selectedProject,
+                boardState = BoardState(selectedProject.project),
                 snackbarHostState = snackbarHostState,
             )
         }
