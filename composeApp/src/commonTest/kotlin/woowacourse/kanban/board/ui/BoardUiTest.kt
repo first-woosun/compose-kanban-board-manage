@@ -18,7 +18,6 @@ import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.board.components.KanbanSnackBar
 import kotlin.test.Test
 import woowacourse.kanban.domain.project.KanbanProject
-import woowacourse.kanban.domain.task.TaskManager
 
 @OptIn(ExperimentalTestApi::class)
 class BoardUiTest {
@@ -28,7 +27,7 @@ class BoardUiTest {
         // given : 새 태스크 버튼이 주어진다
         setContent {
             KanbanBoard(
-                project = KanbanProject(mutableListOf()),
+                project = KanbanProject(listOf()),
             )
         }
 
@@ -61,10 +60,7 @@ class BoardUiTest {
     @Test
     fun `태스크 카드가 생성되고 스낵바가 출력되어야 한다`() = runComposeUiTest {
         // given : 태스크 카드 정상 입력값이 주어진다
-        lateinit var action: TaskManager
-
         setContent {
-            val scope = rememberCoroutineScope()
             val snackBarHostState = remember { SnackbarHostState() }
 
             Scaffold(

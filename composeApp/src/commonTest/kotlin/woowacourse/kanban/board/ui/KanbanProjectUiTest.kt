@@ -23,10 +23,10 @@ import woowacourse.kanban.board.KanbanPage
 import woowacourse.kanban.board.components.KanbanSidebar
 import woowacourse.kanban.board.components.KanbanSnackBar
 import kotlin.test.Test
-import woowacourse.kanban.domain.task.TaskManager
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.BoardState
+import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.domain.task.TaskStatus
 
 @OptIn(ExperimentalTestApi::class)
@@ -36,7 +36,7 @@ class KanbanProjectUiTest {
     fun `프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다`() = runComposeUiTest {
         // given : 칸반 페이지가 주어지고 프로젝트 리스트는 칸반 페이지 내부에 MockData로 설정 되어 있다
         setContent {
-            KanbanPage()
+            KanbanPage(projects = MockData.MOCK_PROJECTS)
         }
 
         // when : 프로젝트 버튼을 눌렀을 때
@@ -53,7 +53,7 @@ class KanbanProjectUiTest {
     fun `프로젝트를 선택하면 보드의 제목이 변경되어야 한다`() = runComposeUiTest {
         // given : 칸반 페이지가 주어지고 프로젝트 리스트는 칸반 페이지 내부에 MockData로 설정 되어 있다
         setContent {
-            KanbanPage()
+            KanbanPage(projects = MockData.MOCK_PROJECTS)
         }
 
         // when : 가장 처음 프로젝트의 제목이 표시되고 다른 프로젝트 버튼을 눌렀을 때
@@ -69,8 +69,7 @@ class KanbanProjectUiTest {
     @Test
     fun `사이드바에 프로젝트 리스트가 출력되어야 한다`() = runComposeUiTest {
         // given : 목 데이터가 주어진다
-        val mock =
-            MockData.MOCK_PROJECTS
+        val mock = MockData.MOCK_PROJECTS
 
         // when : 사이드바에 프로젝트 리스트가 표시될 때
         setContent {
@@ -90,45 +89,31 @@ class KanbanProjectUiTest {
     @Test
     fun `상태를 변경 했을 때 스낵바가 출력되어야 한다`() = runComposeUiTest {
         // given : snackBarHostState를 설정한 Scaffold와 BoardAction가 주어진다.
-        lateinit var action: TaskManager
+        val project = MockData.MOCK_PROJECTS.first()
+
         lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
 
         setContent {
-            val scope = rememberCoroutineScope()
-            val snackBarHostState = remember { SnackbarHostState() }
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(project.project) }
 
-            val project = MockData.MOCK_PROJECTS.first()
-            state = BoardState(
-                scope = scope,
-                project = project,
-                snackBarHostState = snackBarHostState,
-            )
-            action =
-                TaskManager(
-                    project.tasks,
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) })
+            { paddingValues ->
+                KanbanBoard(
+                    project = project,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues)
                 )
-
-            Scaffold(
-                snackbarHost = {
-                    SnackbarHost(snackBarHostState, modifier = Modifier.offset(y = (-50).dp)) { data ->
-                        KanbanSnackBar(data)
-                    }
-                },
-            ) { innerPadding ->
-                Box(modifier = Modifier.padding(innerPadding))
             }
         }
 
         // when : 상태 변경 함수를 호출했을 때
-        action.changeStatus(
-            task = MockData.MOCK_PROJECTS.first().tasks.first(),
-            status = TaskStatus.DONE,
-            idx = 0,
-        )
-        state.showKanbanSnackBar(SnackBarText.EDIT_TASK)
+        state.changeTask(newStatus = TaskStatus.DONE, 0)
+
 
         // then : "태스크가 이동되었습니다" 스낵바가 출력되어야 한다.
-        awaitIdle()
-        onNodeWithText(SnackBarText.EDIT_TASK).assertExists()
+        onNodeWithText(SnackBarText.EDIT_TASK, useUnmergedTree = true).assertExists()
     }
 }

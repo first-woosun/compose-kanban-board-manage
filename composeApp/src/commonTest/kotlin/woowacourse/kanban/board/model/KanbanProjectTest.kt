@@ -6,7 +6,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
-import woowacourse.kanban.domain.task.TaskManager
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
@@ -20,16 +19,10 @@ class KanbanProjectTest {
         val project = KanbanProject(mutableListOf())
 
         val state = BoardState(
-            scope = backgroundScope,
-            project = project,
-            snackBarHostState = SnackbarHostState(),
+            project = emptyList(),
         )
-        val action =
-            TaskManager(
-                project.tasks,
-            )
 
-        action.addTask(
+        state.addTask(
             KanbanTask(
                 data = TaskData(
                     title = Title("제목"),
@@ -41,7 +34,7 @@ class KanbanProjectTest {
             ),
         )
 
-        assertEquals(1, project.tasks.size)
+        assertEquals(1, state.totalTaskCount)
     }
 
     @Test
@@ -56,19 +49,11 @@ class KanbanProjectTest {
             status = TaskStatus.IN_PROGRESS,
         )
 
-        val project = KanbanProject(mutableListOf(task))
-
         val state = BoardState(
-            scope = backgroundScope,
-            project = project,
-            snackBarHostState = SnackbarHostState(),
+            project = listOf(task),
         )
-        val action =
-            TaskManager(
-                project.tasks,
-            )
 
-        action.changeStatus(task, TaskStatus.DONE, idx = 0)
+        state.changeTask( TaskStatus.DONE, 0)
 
         assertEquals(TaskStatus.DONE, state.totalTasksGetter().first().status)
     }
