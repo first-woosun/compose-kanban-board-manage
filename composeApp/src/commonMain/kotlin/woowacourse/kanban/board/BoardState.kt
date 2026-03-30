@@ -14,9 +14,7 @@ import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
 class BoardState(
-    private val scope: CoroutineScope,
     project: List<KanbanTask>,
-    private val snackBarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
 
     private val totalTasks = mutableStateListOf<KanbanTask>().apply {
@@ -62,12 +60,5 @@ class BoardState(
 
     fun totalTasksGetter(): MutableList<KanbanTask> {
         return totalTasks
-    }
-
-    fun showKanbanSnackBar(message: String) {
-        scope.launch {
-            snackBarHostState.currentSnackbarData?.dismiss()
-            snackBarHostState.showSnackbar(message)
-        }
     }
 }

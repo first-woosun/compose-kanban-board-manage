@@ -41,9 +41,8 @@ fun KanbanBoard(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
-    val scope = rememberCoroutineScope()
 
-    val state = remember(project) { BoardState(scope, project.project, snackbarHostState) }
+    val state = remember(project) { BoardState(project.project) }
 
     var draggedTask by remember { mutableStateOf<KanbanTask?>(null) }
     var currentDragPosition by remember { mutableStateOf<Offset?>(null) }
