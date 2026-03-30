@@ -1,6 +1,6 @@
 package woowacourse.kanban.domain.task
 
-class Tags(val tags: List<String> = listOf()) {
+class Tags(val tags: List<String> = emptyList()) {
     init {
         require(tags.size <= MAX_TAG_SIZE) { "태그는 5개를 초과할 수 없습니다." }
         require(tags.all { it.length <= MAX_TAG_CONTENT_SIZE }) { "태그의 내용은 5자를 초과할 수 없습니다." }
