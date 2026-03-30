@@ -1,4 +1,4 @@
-package woowacourse.kanban.card.ui
+package woowacourse.kanban.card.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.Colors
-import woowacourse.kanban.model.Tags
+import woowacourse.kanban.domain.task.Tags
 
 @Composable
 fun TagsComponent(

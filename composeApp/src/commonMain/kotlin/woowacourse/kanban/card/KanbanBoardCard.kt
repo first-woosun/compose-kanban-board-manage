@@ -1,4 +1,4 @@
-package woowacourse.kanban.card.ui
+package woowacourse.kanban.card.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,10 +33,10 @@ import woowacourse.kanban.card.constant.DEFAULT_TITLE
 import woowacourse.kanban.card.constant.MAX_CONTENT
 import woowacourse.kanban.card.constant.MAX_NAME
 import woowacourse.kanban.card.constant.MAX_TITLE
-import woowacourse.kanban.model.BoardData
-import woowacourse.kanban.model.Nickname
-import woowacourse.kanban.model.Tags
-import woowacourse.kanban.model.Title
+import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.Nickname
+import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.Title
 
 @Composable
 fun KanbanCard(

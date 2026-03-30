@@ -1,4 +1,4 @@
-package woowacourse.kanban.create.ui.createTextInput
+package woowacourse.kanban.create.components.createTextInput
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

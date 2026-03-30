@@ -1,23 +1,27 @@
-package woowacourse.kanban.card.ui
+package woowacourse.kanban.card.components
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.Colors
 
 @Composable
-fun Tag(
+fun Content(
     content: String,
     modifier: Modifier = Modifier,
 ) {
-    val maxLength = 5
-
     Box(
         modifier = modifier,
     ) {
-        Text(content.take(maxLength), modifier = Modifier.padding(6.dp), fontSize = 10.sp)
+        Text(
+            content,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2,
+            fontSize = 14.sp,
+            color = Colors.ContentText,
+        )
     }
 }

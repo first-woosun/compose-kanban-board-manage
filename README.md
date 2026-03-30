@@ -32,3 +32,17 @@
   - 프로젝트 컬럼
 - [x] 태스크 상태 변경 스낵바 텍스트
   - "태스크가 이동되었습니다."
+
+## 1차 피드백
+- [ ] 패키지 구조 수정
+- [ ] 함수 반환타입 불변 리스트로 변경
+- [ ] Task의 status를 TaskManager에서 변경하고 있음
+- [ ] ASSIGNEES는 val인데 MOCK_PROJECT는 var인 이유
+- [ ] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
+- [ ] showDialog 필드는 외부에서 자유롭게 변경되어도 괜찮은가?
+- [ ] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
+- [ ] LazyColumn에서 index를 써야만 아이템을 그릴 수 있는가?
+- [ ] TaskCreateDialog 프리뷰 함수
+- [ ] TaskCreateDialog Modifier 파라밑터 기본값 지정
+- [ ] 테스트 코드의 이름을 좀 더 자명하게 수정해보기
+- [ ] "프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다" KanbanPage 프로젝트 파라미터 추가

@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.Colors
 import woowacourse.kanban.card.ui.KanbanCard
-import woowacourse.kanban.model.KanbanTask
-import woowacourse.kanban.model.TaskStatus
+import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.TaskStatus
 
 private val TaskStatus.displayName: String
     get() = when (this) {

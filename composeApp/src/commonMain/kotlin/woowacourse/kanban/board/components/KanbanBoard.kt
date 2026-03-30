@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,14 +18,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.model.KanbanProject
-import woowacourse.kanban.board.model.TaskManager
-import woowacourse.kanban.board.ui.constant.MockData
-import woowacourse.kanban.board.ui.constant.SnackBarText
-import woowacourse.kanban.board.ui.stateholder.BoardState
+import woowacourse.kanban.board.constant.MockData
+import woowacourse.kanban.board.constant.SnackBarText
+import woowacourse.kanban.board.stateholder.BoardState
+import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.TaskManager
 import woowacourse.kanban.create.ui.TaskCreateDialog
-import woowacourse.kanban.model.KanbanTask
-import woowacourse.kanban.model.TaskStatus
+import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.TaskStatus
 
 private fun TaskStatus.tasks(state: BoardState): List<KanbanTask> {
     return when (this) {
