@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
@@ -15,7 +15,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.ui.constant.MockData
+import woowacourse.kanban.board.components.KanbanBoard
+import woowacourse.kanban.board.components.KanbanSidebar
+import woowacourse.kanban.board.components.KanbanSnackBar
+import woowacourse.kanban.board.constant.MockData
 
 @Composable
 fun KanbanPage(modifier: Modifier = Modifier) {

@@ -8,11 +8,10 @@ import kotlin.test.Test
 import woowacourse.kanban.card.constant.DEFAULT_CONTENT
 import woowacourse.kanban.card.constant.DEFAULT_NAME
 import woowacourse.kanban.card.constant.DEFAULT_TITLE
-import woowacourse.kanban.card.ui.KanbanCard
-import woowacourse.kanban.model.BoardData
-import woowacourse.kanban.model.Nickname
-import woowacourse.kanban.model.Tags
-import woowacourse.kanban.model.Title
+import woowacourse.kanban.domain.task.BoardData
+import woowacourse.kanban.domain.task.Nickname
+import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.Title
 
 @OptIn(ExperimentalTestApi::class)
 class BoardTest {

@@ -1,11 +1,4 @@
-package woowacourse.kanban.create.model
-
-import woowacourse.kanban.domain.task.Assignee
-import woowacourse.kanban.domain.task.BoardData
-import woowacourse.kanban.domain.task.KanbanTask
-import woowacourse.kanban.domain.task.Tags
-import woowacourse.kanban.domain.task.TaskStatus
-import woowacourse.kanban.domain.task.Title
+package woowacourse.kanban.domain.task
 
 class TaskCreateAction {
 

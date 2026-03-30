@@ -1,12 +1,12 @@
-package woowacourse.kanban.board
+package woowacourse.kanban
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.Colors
-import woowacourse.kanban.board.ui.KanbanPage
+import woowacourse.kanban.board.KanbanPage
+import woowacourse.kanban.core.design.Colors
 
 @Composable
 fun App() {

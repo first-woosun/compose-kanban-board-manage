@@ -1,4 +1,4 @@
-package woowacourse.kanban.card.components
+package woowacourse.kanban.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,7 +26,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.Colors
+import woowacourse.kanban.core.design.Colors
+import woowacourse.kanban.card.components.CardTitle
+import woowacourse.kanban.card.components.Content
+import woowacourse.kanban.card.components.Profile
+import woowacourse.kanban.card.components.TagsComponent
 import woowacourse.kanban.card.constant.DEFAULT_CONTENT
 import woowacourse.kanban.card.constant.DEFAULT_NAME
 import woowacourse.kanban.card.constant.DEFAULT_TITLE
@@ -84,23 +88,35 @@ fun KanbanCard(
     ) {
         Column {
             // 제목
-            CardTitle(title = board.title, modifier = Modifier.padding(vertical = 8.dp).testTag("제목"))
+            CardTitle(
+                title = board.title,
+                modifier = Modifier.padding(vertical = 8.dp).testTag("제목")
+            )
 
             // 중간 내용
             if (board.content.isNotBlank()) {
-                Content(content = board.content, modifier = Modifier.padding(vertical = 4.dp).testTag("중간내용"))
+                Content(
+                    content = board.content,
+                    modifier = Modifier.padding(vertical = 4.dp).testTag("중간내용")
+                )
             }
 
             // 태그
             if (board.tags.tags.isNotEmpty()) {
-                TagsComponent(tags = board.tags, modifier = Modifier.padding(vertical = 8.dp).testTag("테그목록"))
+                TagsComponent(
+                    tags = board.tags,
+                    modifier = Modifier.padding(vertical = 8.dp).testTag("테그목록")
+                )
             }
 
             // 구분선
             HorizontalDivider(thickness = 2.dp)
 
             // 작성자
-            Profile(nickname = board.nickname, modifier = Modifier.padding(vertical = 8.dp).testTag("프로필"))
+            Profile(
+                nickname = board.nickname,
+                modifier = Modifier.padding(vertical = 8.dp).testTag("프로필")
+            )
         }
     }
 }

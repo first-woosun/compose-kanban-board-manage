@@ -34,7 +34,7 @@
   - "태스크가 이동되었습니다."
 
 ## 1차 피드백
-- [ ] 패키지 구조 수정
+- [x] 패키지 구조 수정
 - [ ] 함수 반환타입 불변 리스트로 변경
 - [ ] Task의 status를 TaskManager에서 변경하고 있음
 - [ ] ASSIGNEES는 val인데 MOCK_PROJECT는 var인 이유

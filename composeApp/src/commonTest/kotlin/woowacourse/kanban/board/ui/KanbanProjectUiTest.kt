@@ -19,12 +19,15 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.KanbanPage
+import woowacourse.kanban.board.components.KanbanSidebar
+import woowacourse.kanban.board.components.KanbanSnackBar
 import kotlin.test.Test
-import woowacourse.kanban.board.model.TaskManager
-import woowacourse.kanban.board.ui.constant.MockData
-import woowacourse.kanban.board.ui.constant.SnackBarText
-import woowacourse.kanban.board.ui.stateholder.BoardState
-import woowacourse.kanban.model.TaskStatus
+import woowacourse.kanban.domain.task.TaskManager
+import woowacourse.kanban.board.constant.MockData
+import woowacourse.kanban.board.constant.SnackBarText
+import woowacourse.kanban.board.BoardState
+import woowacourse.kanban.domain.task.TaskStatus
 
 @OptIn(ExperimentalTestApi::class)
 class KanbanProjectUiTest {

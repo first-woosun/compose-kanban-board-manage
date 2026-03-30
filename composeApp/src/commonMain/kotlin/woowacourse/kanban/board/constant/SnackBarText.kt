@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.constant
+package woowacourse.kanban.board.constant
 
 object SnackBarText {
     const val CREATE_TASK = "새로운 태스크가 추가되었습니다."

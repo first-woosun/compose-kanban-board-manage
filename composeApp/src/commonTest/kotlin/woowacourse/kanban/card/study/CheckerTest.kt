@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
+import woowacourse.kanban.study.CheckerView
 import kotlin.test.Test
 
 @OptIn(ExperimentalTestApi::class)

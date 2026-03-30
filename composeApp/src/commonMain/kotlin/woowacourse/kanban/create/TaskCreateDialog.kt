@@ -20,7 +20,7 @@ import woowacourse.kanban.create.components.createTextInput.CreateTextInput
 import woowacourse.kanban.create.components.radioSelector.CoachButton
 import woowacourse.kanban.create.components.radioSelector.RadioSelector
 import woowacourse.kanban.create.components.radioSelector.StatusButton
-import woowacourse.kanban.create.components.stateholder.TaskCreateState
+import woowacourse.kanban.create.TaskCreateState
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus

@@ -4,7 +4,7 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.junit.Assert
-import woowacourse.kanban.model.Tags
+import woowacourse.kanban.domain.task.Tags
 
 @OptIn(ExperimentalTestApi::class)
 class TagsTest {

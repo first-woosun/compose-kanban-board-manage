@@ -1,4 +1,4 @@
-package woowacourse.kanban.model
+package woowacourse.kanban.domain.task
 
 class Tags(val tags: List<String> = listOf()) {
     init {

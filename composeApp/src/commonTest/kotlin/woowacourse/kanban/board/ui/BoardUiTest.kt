@@ -14,9 +14,11 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.components.KanbanBoard
+import woowacourse.kanban.board.components.KanbanSnackBar
 import kotlin.test.Test
-import woowacourse.kanban.board.model.KanbanProject
-import woowacourse.kanban.board.model.TaskManager
+import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.TaskManager
 
 @OptIn(ExperimentalTestApi::class)
 class BoardUiTest {

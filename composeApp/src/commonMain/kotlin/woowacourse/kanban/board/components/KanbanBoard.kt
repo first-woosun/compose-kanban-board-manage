@@ -1,4 +1,4 @@
-package woowacourse.kanban.board
+package woowacourse.kanban.board.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,10 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
-import woowacourse.kanban.board.stateholder.BoardState
+import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.TaskManager
-import woowacourse.kanban.create.ui.TaskCreateDialog
+import woowacourse.kanban.create.TaskCreateDialog
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 

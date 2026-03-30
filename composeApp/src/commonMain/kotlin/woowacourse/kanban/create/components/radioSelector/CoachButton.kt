@@ -22,7 +22,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import woowacourse.kanban.Colors
+import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.domain.task.Assignee
 
 @Composable

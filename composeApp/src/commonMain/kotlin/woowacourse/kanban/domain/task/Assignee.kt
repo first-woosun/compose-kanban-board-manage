@@ -1,3 +1,3 @@
-package woowacourse.kanban.model
+package woowacourse.kanban.domain.task
 
 data class Assignee(val nickname: Nickname)
