@@ -16,8 +16,6 @@ import woowacourse.kanban.domain.task.Title
 class KanbanProjectTest {
     @Test
     fun `새 태스크를 생성했을 때 현재 프로젝트에 삽입되어야 한다`() = runTest {
-        val project = KanbanProject(mutableListOf())
-
         val state = BoardState(
             project = emptyList(),
         )
