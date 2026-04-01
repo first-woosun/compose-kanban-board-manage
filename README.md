@@ -60,7 +60,7 @@
   - totalTaskGetter의 반환 타입이 변경 가능 리스트인데 괜찮은가?
   - 각 card 리스트를 3개의 변수로 관리하는 것 보단 하나의 함수로 합쳐보기
 - [x] KanbanPage에서 테스크를 추가하고 다른 프로젝트로 이동했다가 다시 돌아오면 추가했던 프로젝트가 사라짐
-- [ ] onCreateValidator 함수가 굳이 필요한가? 
-- [ ] TaskData의 아이디를 시간으로 한 이유
+- [x] onCreateValidator 함수가 굳이 필요한가? 
+- [x] TaskData의 아이디를 시간으로 한 이유
 - [ ] 여러 곳에 산재한 ERROR_TAG 통일
 - [x] Task의 changeStatus 리펙터링

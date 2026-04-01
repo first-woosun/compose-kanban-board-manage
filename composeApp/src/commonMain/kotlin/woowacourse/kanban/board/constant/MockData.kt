@@ -8,6 +8,7 @@ import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
+import java.util.UUID
 
 object MockData {
     val ASSIGNEES = listOf(
@@ -33,7 +34,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 0,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
                 ),
@@ -43,7 +44,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 1,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
                 ),
@@ -53,7 +54,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 2,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
                 ),
@@ -68,7 +69,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 3,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
                 ),
@@ -78,7 +79,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 4,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
                 ),
@@ -88,7 +89,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 5,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
                 ),
@@ -103,7 +104,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 6,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
                 ),
@@ -113,7 +114,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 7,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
                 ),
@@ -123,7 +124,7 @@ object MockData {
                         content = "내용",
                         tags = Tags(),
                         nickname = Nickname("아오"),
-                        id = 8,
+                        id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
                 ),
