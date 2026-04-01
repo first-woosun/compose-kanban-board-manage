@@ -47,3 +47,20 @@
 - [x] 테스트 코드의 이름을 좀 더 자명하게 수정해보기
 - [x] KanbanPage 프로젝트 파라미터 추가
 - [x] KanbanPage snackbarHostState 파라미터 추가
+
+## 2차 피드백
+- [ ] 테스트 코드 불필요한 줄넘김 점검
+- [ ] KanbanProject 
+  - backing property
+  - 역할과 책임 강화
+- [ ] BoardState
+  - BoardState는 무엇이며, 여기에는 어떤 값들이 들어가야 하는가?
+  - State와 State Holder는 무엇인가?
+  - BoardState는 State Holder인가?
+  - totalTaskGetter의 반환 타입이 변경 가능 리스트인데 괜찮은가?
+  - 각 card 리스트를 3개의 변수로 관리하는 것 보단 하나의 함수로 합쳐보기
+- [ ] TaskCard 드래그 로직은 어디서 관리하는게 맞는가?
+- [ ] KanbanPage에서 테스크를 추가하고 다른 프로젝트로 이동했다가 다시 돌아오면 추가했던 프로젝트가 사라짐
+- [ ] onCreateValidator 함수가 굳이 필요한가? 
+- [ ] TaskData의 아이디를 시간으로 한 이유
+- [ ] 여러 곳에 산재한 ERROR_TAG 통일
