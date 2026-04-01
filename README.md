@@ -49,7 +49,7 @@
 - [x] KanbanPage snackbarHostState 파라미터 추가
 
 ## 2차 피드백
-- [ ] 테스트 코드 불필요한 줄넘김 점검
+- [x] 테스트 코드 불필요한 줄넘김 점검
 - [ ] KanbanProject 
   - backing property
   - 역할과 책임 강화

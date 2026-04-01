@@ -12,41 +12,34 @@ class NicknameTest {
     @Test
     fun `닉네임이 비어있거나 공백이 아닌 경우 오류가 발생하지 않아야 한다`() {
         // given
-        val nickname =
-            "아오"
+        val nickname = "아오"
 
         // when
-        val data =
-            Nickname(nickname)
+        val data = Nickname(nickname)
 
         // then
-        assertEquals(
-            "아오",
-            data.nickname,
-        )
+        assertEquals("아오", data.nickname)
     }
 
     @Test
     fun `닉네임이 비어져있는 경우 오류가 발생해야 한다`() {
         // given
-        val nickname =
-            ""
+        val nickname = ""
+
         // when
+
         // then
-        Assert.assertThrows(IllegalArgumentException::class.java) {
-            Nickname(nickname)
-        }
+        Assert.assertThrows(IllegalArgumentException::class.java) { Nickname(nickname) }
     }
 
     @Test
     fun `닉네임이 공백으로만 이루어진 경우 오류가 발생해야 한다`() {
         // given
-        val nickname =
-            " "
+        val nickname = " "
+
         // when
+
         // then
-        Assert.assertThrows(IllegalArgumentException::class.java) {
-            Nickname(nickname)
-        }
+        Assert.assertThrows(IllegalArgumentException::class.java) { Nickname(nickname) }
     }
 }

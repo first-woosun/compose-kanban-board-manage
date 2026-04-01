@@ -34,7 +34,6 @@ class DialogTest {
         var selectedStatusIndex = mutableIntStateOf(0)
 
         // given
-
         setContent {
             RadioSelector(
                 header = "상태 *",
@@ -51,6 +50,7 @@ class DialogTest {
         // when
         onNodeWithText(TaskStatus.IN_PROGRESS.displayName).performClick()
         waitForIdle()
+
         // then
         onNodeWithText(TaskStatus.IN_PROGRESS.displayName).assertIsSelected()
         onNodeWithText(TaskStatus.TO_DO.displayName).assertIsNotSelected()
@@ -62,16 +62,8 @@ class DialogTest {
         var selectedCoachIndex = mutableIntStateOf(0)
         // given
         val assignees = listOf(
-            Assignee(
-                Nickname(
-                    "다이노",
-                ),
-            ),
-            Assignee(
-                Nickname(
-                    "페임스",
-                ),
-            ),
+            Assignee(Nickname("다이노")),
+            Assignee(Nickname("페임스")),
         )
 
         setContent {
@@ -90,6 +82,7 @@ class DialogTest {
         // when
         onNodeWithText("페임스").performClick()
         waitForIdle()
+
         // then
         onNodeWithText("페임스").assertIsSelected()
         onNodeWithText("다이노").assertIsNotSelected()
@@ -99,13 +92,13 @@ class DialogTest {
     fun `제목 검증 혹은 태그 검증에 실패시 생성 버튼 비활성화 되어야 한다`() = runComposeUiTest {
         // given
         setContent {
-
             TaskCreateDialog(
                 onDismiss = { showDialog.value = false },
                 onCreateTask = {},
                 modifier = Modifier,
             )
         }
+
         // when
         onNodeWithText("태스크 제목을 입력하세요").performTextInput("제목")
         waitForIdle()
@@ -113,6 +106,7 @@ class DialogTest {
         waitForIdle()
         onNodeWithText("생성").performClick()
         waitForIdle()
+
         // then
         onNodeWithText("생성").assertIsNotEnabled()
     }
@@ -133,6 +127,7 @@ class DialogTest {
         onNodeWithText("태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)").performTextInput("태그입력")
         onNodeWithText("태스크 제목을 입력하세요").performTextInput("제목입력")
         waitForIdle()
+
         // then
         onNodeWithText("태그입력").assertExists()
         onNodeWithText("제목입력").assertExists()
@@ -156,6 +151,7 @@ class DialogTest {
         waitForIdle()
         onNodeWithText("생성").performClick()
         waitForIdle()
+
         // then
         onNodeWithText("이건,,,,올바르지 않은 형식입니다,,,,,,,,,").assertExists()
     }
