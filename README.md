@@ -53,7 +53,7 @@
 - [x] KanbanProject 
   - backing property
   - 역할과 책임 강화
-- [ ] BoardState
+- [x] BoardState
   - BoardState는 무엇이며, 여기에는 어떤 값들이 들어가야 하는가?
   - State와 State Holder는 무엇인가?
   - BoardState는 State Holder인가?
