@@ -50,7 +50,7 @@
 
 ## 2차 피드백
 - [x] 테스트 코드 불필요한 줄넘김 점검
-- [ ] KanbanProject 
+- [x] KanbanProject 
   - backing property
   - 역할과 책임 강화
 - [ ] BoardState
@@ -64,4 +64,4 @@
 - [ ] onCreateValidator 함수가 굳이 필요한가? 
 - [ ] TaskData의 아이디를 시간으로 한 이유
 - [ ] 여러 곳에 산재한 ERROR_TAG 통일
-- [ ] Task의 changeStatus 리펙터링
+- [x] Task의 changeStatus 리펙터링
