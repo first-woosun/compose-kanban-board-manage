@@ -64,12 +64,11 @@ class TaskCreateState {
     }
 
     fun titleValidation(): Boolean {
-        return titleInputValue.isEmpty()
+        return Title.isValidTitle(titleInputValue)
     }
 
     fun tagValidation(): Boolean {
-        val tags = tagInputValue.split(",").map { it.trim() }
-        return tags.size > 5 || tags.any { it.length > 5 }
+        return Tags.isValidTags(tagInputValue)
     }
 
     fun taskCreate(assignee: Assignee): KanbanTask {

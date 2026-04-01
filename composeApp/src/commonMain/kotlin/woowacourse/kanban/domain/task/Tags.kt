@@ -9,5 +9,10 @@ class Tags(val tags: List<String> = emptyList()) {
     companion object {
         private const val MAX_TAG_SIZE = 5
         private const val MAX_TAG_CONTENT_SIZE = 5
+
+        fun isValidTags(inputTags: String): Boolean {
+            val tags = inputTags.split(",").map { it.trim() }
+            return tags.size > 5 || tags.any { it.length > 5 }
+        }
     }
 }
