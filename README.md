@@ -62,5 +62,5 @@
 - [x] KanbanPage에서 테스크를 추가하고 다른 프로젝트로 이동했다가 다시 돌아오면 추가했던 프로젝트가 사라짐
 - [x] onCreateValidator 함수가 굳이 필요한가? 
 - [x] TaskData의 아이디를 시간으로 한 이유
-- [ ] 여러 곳에 산재한 ERROR_TAG 통일
+- [x] 여러 곳에 산재한 ERROR_TAG 통일
 - [x] Task의 changeStatus 리펙터링

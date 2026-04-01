@@ -1,9 +1,11 @@
 package woowacourse.kanban.domain.task
 
+import woowacourse.kanban.core.design.ErrorPrefix
+
 class Tags(val tags: List<String> = emptyList()) {
     init {
-        require(tags.size <= MAX_TAG_SIZE) { "태그는 5개를 초과할 수 없습니다." }
-        require(tags.all { it.length <= MAX_TAG_CONTENT_SIZE }) { "태그의 내용은 5자를 초과할 수 없습니다." }
+        require(tags.size <= MAX_TAG_SIZE) { "${ErrorPrefix.ERROR_PREFIX}태그는 5개를 초과할 수 없습니다." }
+        require(tags.all { it.length <= MAX_TAG_CONTENT_SIZE }) { "${ErrorPrefix.ERROR_PREFIX}태그의 내용은 5자를 초과할 수 없습니다." }
     }
 
     companion object {

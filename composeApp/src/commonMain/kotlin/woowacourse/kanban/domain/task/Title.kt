@@ -1,11 +1,11 @@
 package woowacourse.kanban.domain.task
 
-private const val ERROR_TAG = "[ERROR]"
+import woowacourse.kanban.core.design.ErrorPrefix
 
 @JvmInline
 value class Title(val content: String) {
     init {
-        require(content.isNotBlank()) { "$ERROR_TAG 제목의 내용이 존재해야 합니다." }
+        require(content.isNotBlank()) { "${ErrorPrefix.ERROR_PREFIX} 제목의 내용이 존재해야 합니다." }
     }
 
     companion object {
