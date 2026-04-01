@@ -25,19 +25,11 @@ import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
-private fun TaskStatus.tasks(state: BoardState): List<KanbanTask> {
-    return when (this) {
-        TaskStatus.TO_DO -> state.todoCardList
-        TaskStatus.IN_PROGRESS -> state.inProgressCardList
-        TaskStatus.DONE -> state.doneCardList
-    }
-}
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KanbanBoard(
     project: KanbanProject,
-    boardState: BoardState = BoardState(project.project),
+    boardState: BoardState = BoardState(project),
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
@@ -56,9 +48,9 @@ fun KanbanBoard(
 
     Column(modifier = modifier) {
         KanbanBoardHeader(
-            progress = state.progress,
-            doneTaskCount = state.doneCardList.size,
-            totalTaskCount = state.totalTaskCount,
+            progress = project.getProgress(),
+            doneTaskCount = project.getTasksWithStatus(TaskStatus.DONE).size,
+            totalTaskCount = project.project.size,
             onClick = { state.toggleDialog() },
             headerTitle = project.title,
         )
@@ -68,7 +60,7 @@ fun KanbanBoard(
         ) {
             TaskStatus.entries.forEach { status ->
                 StatusCardList(
-                    tasks = status.tasks(state),
+                    tasks = project.getTasksWithStatus(status),
                     status = status,
                     modifier = Modifier.weight(1f),
                     getIsDropTarget = {
@@ -88,9 +80,9 @@ fun KanbanBoard(
 
                         draggedTask?.let { task ->
                             if (targetStatus != null && task.status != targetStatus) {
-                                val idx = state.totalTasksGetter().indexOfFirst { it.data.id == task.data.id }
+                                val idx = project.getTaskIndexWithId(task.data.id)
                                 if (idx != -1) {
-                                    state.changeTask(targetStatus, idx)
+                                    state.changeTaskStatus(idx, targetStatus)
                                 }
                             }
                         }

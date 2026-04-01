@@ -24,10 +24,10 @@ import woowacourse.kanban.domain.project.KanbanProject
 @Composable
 fun KanbanPage(
     modifier: Modifier = Modifier,
-    projects: List<KanbanProject> = MockData.MOCK_PROJECTS,
+    inputProjects: List<KanbanProject> = MockData.MOCK_PROJECTS,
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
-    var selectedProject by remember { mutableStateOf(projects.first()) }
+    var selectedProject by remember { mutableStateOf(inputProjects.first()) }
     var selectedProjectIndex by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -40,16 +40,16 @@ fun KanbanPage(
     ) { innerPadding ->
         Row(modifier = Modifier.padding(innerPadding)) {
             KanbanSidebar(
-                projects,
+                inputProjects,
                 selectedProjectIndex = selectedProjectIndex,
                 onClick = { index ->
                     selectedProjectIndex = index
-                    selectedProject = projects[selectedProjectIndex]
+                    selectedProject = inputProjects[selectedProjectIndex]
                 },
             )
             KanbanBoard(
                 project = selectedProject,
-                boardState = BoardState(selectedProject.project),
+                boardState = BoardState(selectedProject),
                 snackbarHostState = snackbarHostState,
             )
         }
