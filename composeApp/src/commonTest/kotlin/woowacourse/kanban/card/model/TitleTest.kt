@@ -1,6 +1,5 @@
 package woowacourse.kanban.card.model
 
-import androidx.compose.ui.test.ExperimentalTestApi
 import kotlin.test.assertEquals
 import org.junit.Assert
 import org.junit.Test

@@ -19,7 +19,7 @@ class TagsTest {
         val data = Tags(tags)
 
         // then
-        assertEquals(listOf("일", "이", "삼", "사", "오"), data.tags,)
+        assertEquals(listOf("일", "이", "삼", "사", "오"), data.tags)
     }
 
     @Test

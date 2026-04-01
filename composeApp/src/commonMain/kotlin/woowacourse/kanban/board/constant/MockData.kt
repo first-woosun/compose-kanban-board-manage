@@ -1,5 +1,6 @@
 package woowacourse.kanban.board.constant
 
+import java.util.UUID
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
@@ -8,7 +9,6 @@ import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
-import java.util.UUID
 
 object MockData {
     val ASSIGNEES = listOf(

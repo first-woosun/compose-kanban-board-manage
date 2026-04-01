@@ -134,6 +134,6 @@ fun TaskCreateDialog(
 fun TaskCreateDialogPreview() {
     TaskCreateDialog(
         onDismiss = { },
-        onCreateTask = { }
+        onCreateTask = { },
     )
 }
