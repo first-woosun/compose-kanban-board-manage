@@ -1,40 +1,66 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+>기능 요구 사항<br>
+디자인 시안을 참고하여 칸반 보드 프로젝트를 구현한다.
+드래그 앤 드롭을 통해 카드 상태를 변경할 수 있게 한다. 
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+>프로그래밍 요구 사항<br>
+여러 번 그려지지 않아도 되는 뷰는 매번 리컴포지션 되지 않아야 한다.
+적절한 테스트 방법을 활용하여 기능 요구 사항을 테스트한다.
+모든 요구 사항이 테스트 가능하진 않다. 스스로 판단해서 구분한다.
+프로젝트 생성을 위한 뷰는 없다. 가짜 데이터와 테스트 더블을 활용한다
 
-### Build and Run Android Application
+## 테스트 목록
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+#### 단위 테스트
+- [x] 새 태스크를 생성했을 때 현재 프로젝트에 삽입되어야 한다
+- [x] 태스크의 상태를 변경 할 수 있어야 한다
+ 
+#### UI 테스트
+- [x] 프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다
+- [x] 프로젝트를 선택하면 보드의 제목이 변경되어야 한다
+- [x] 사이드바에 프로젝트 리스트가 출력되어야 한다
+- [x] 상태를 변경 했을 때 스낵바가 출력되어야 한다
 
-### Build and Run Desktop (JVM) Application
+## 기능 목록
+ - [x] 태스크 카드 드래그 앤 드롭
+ - [x] 태스크 카드의 상태가 변경되었을 때 스낵바를 출력해야 한다
+ - [x] 태스크를 프로젝트 별로 관리할 수 있어야 한다
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+## UI 목록
+- [x] 프로젝트 사이드바
+  - 드로워 헤더
+  - 드로워 설명
+  - 프로젝트 컬럼
+- [x] 태스크 상태 변경 스낵바 텍스트
+  - "태스크가 이동되었습니다."
 
----
+## 1차 피드백
+- [x] 패키지 구조 수정
+- [x] 함수 반환타입 불변 리스트로 변경
+- [x] TaskCreateAction 제거
+- [x] MOCK_PROJECT 불변 리스트로 변경
+- [x] derivedStateOf의 역활과 사용한 이유, 적절한 사용인가?
+- [x] showDialog 필드는 외부에서 자유롭게 변경되어도 괜찮은가?
+- [x] CouroutineScope.launch로 Job을 생성하지 않고 사이드 이펙트를 활용하는 방법도 있는데 이를 활용하면 구조가 어떻게 개선되는가
+- [x] LazyColumn에서 index를 써야만 아이템을 그릴 수 있는가?
+- [x] TaskCreateDialog 프리뷰 함수
+- [x] TaskCreateDialog Modifier 파라밑터 기본값 지정
+- [x] 테스트 코드의 이름을 좀 더 자명하게 수정해보기
+- [x] KanbanPage 프로젝트 파라미터 추가
+- [x] KanbanPage snackbarHostState 파라미터 추가
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 2차 피드백
+- [x] 테스트 코드 불필요한 줄넘김 점검
+- [x] KanbanProject 
+  - backing property
+  - 역할과 책임 강화
+- [x] BoardState
+  - BoardState는 무엇이며, 여기에는 어떤 값들이 들어가야 하는가?
+  - State와 State Holder는 무엇인가?
+  - BoardState는 State Holder인가?
+  - totalTaskGetter의 반환 타입이 변경 가능 리스트인데 괜찮은가?
+  - 각 card 리스트를 3개의 변수로 관리하는 것 보단 하나의 함수로 합쳐보기
+- [x] KanbanPage에서 테스크를 추가하고 다른 프로젝트로 이동했다가 다시 돌아오면 추가했던 프로젝트가 사라짐
+- [x] onCreateValidator 함수가 굳이 필요한가? 
+- [x] TaskData의 아이디를 시간으로 한 이유
+- [x] 여러 곳에 산재한 ERROR_TAG 통일
+- [x] Task의 changeStatus 리펙터링
