@@ -26,6 +26,7 @@ class DialogTest {
         get() = when (this) {
             TaskStatus.TO_DO -> "To Do"
             TaskStatus.IN_PROGRESS -> "In Progress"
+            TaskStatus.REVIEW -> "Review"
             TaskStatus.DONE -> "Done"
         }
 

@@ -4,6 +4,7 @@ import kotlin.test.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import woowacourse.kanban.board.BoardState
+import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -14,11 +15,9 @@ import woowacourse.kanban.domain.task.Title
 class KanbanProjectTest {
     @Test
     fun `새 태스크를 생성했을 때 현재 프로젝트에 삽입되어야 한다`() = runTest {
-        val state = BoardState(
-            project = emptyList(),
-        )
+        val project = KanbanProject()
 
-        state.addTask(
+        project.addTask(
             KanbanTask(
                 data = TaskData(
                     title = Title("제목"),
@@ -30,27 +29,26 @@ class KanbanProjectTest {
             ),
         )
 
-        assertEquals(1, state.totalTaskCount)
+        assertEquals(1, project.project.size)
     }
 
     @Test
     fun `태스크의 상태를 변경 할 수 있어야 한다`() = runTest {
-        var task = KanbanTask(
-            data = TaskData(
-                title = Title("제목"),
-                content = "내용",
-                tags = Tags(),
-                nickname = Nickname("아오"),
-            ),
-            status = TaskStatus.IN_PROGRESS,
+        val project = KanbanProject(
+            listOf(KanbanTask(
+                    data = TaskData(
+                    title = Title("제목"),
+                    content = "내용",
+                    tags = Tags(),
+                    nickname = Nickname("아오"),
+                ),
+                status = TaskStatus.IN_PROGRESS,
+                )
+            )
         )
 
-        val state = BoardState(
-            project = listOf(task),
-        )
+        project.changeTaskStatus(0, TaskStatus.REVIEW)
 
-        state.changeTask(TaskStatus.DONE, 0)
-
-        assertEquals(TaskStatus.DONE, state.totalTasksGetter().first().status)
+        assertEquals(TaskStatus.REVIEW, project.project[0].status)
     }
 }

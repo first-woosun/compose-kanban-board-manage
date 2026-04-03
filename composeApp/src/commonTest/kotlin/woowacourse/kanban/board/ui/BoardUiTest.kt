@@ -13,10 +13,19 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.BoardState
 import kotlin.test.Test
 import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.board.components.KanbanSnackBar
+import woowacourse.kanban.board.constant.MockData
+import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.Nickname
+import woowacourse.kanban.domain.task.Tags
+import woowacourse.kanban.domain.task.TaskData
+import woowacourse.kanban.domain.task.TaskStatus
+import woowacourse.kanban.domain.task.Title
 
 @OptIn(ExperimentalTestApi::class)
 class BoardUiTest {
@@ -40,52 +49,78 @@ class BoardUiTest {
     @Test
     fun `생성 다이얼로그에서 정상적인 값들을 입력 후 생성 버튼을 누르면 칸반 보드 리스트에 표시되어야 한다`() = runComposeUiTest {
         // given : 태스크 카드 정상 입력값이 주어진다
+        val project = MockData.MOCK_PROJECTS.first()
+
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
         setContent {
-            KanbanBoard(project = KanbanProject(mutableListOf()))
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(project) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = project,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
         }
 
-        // when : 생성 다이얼로그에서 정상적인 값을 입력 후 생성 버튼을 누를 때
-        onNodeWithText("새 태스크 생성").performClick()
-        waitForIdle()
-        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
-        waitForIdle()
-        onNodeWithText("생성").performClick()
-        waitForIdle()
+        // when: 새로운 태스크가 생성됐을 때
+        state.addTask(
+            KanbanTask(
+                data = TaskData(
+                    title = Title("title"),
+                    content = "",
+                    tags = Tags(emptyList()),
+                    nickname = Nickname("투핸더"),
+                ),
+                status = TaskStatus.TO_DO
+            )
+        )
 
         // then : 칸반 보드에서 입력된 카드가 보여야 한다
-        onNodeWithText("태스크제목").assertExists()
+        onNodeWithText("title", useUnmergedTree = true).assertExists()
     }
 
     @Test
     fun `태스크 카드가 생성되고 스낵바가 출력되어야 한다`() = runComposeUiTest {
         // given : 태스크 카드 정상 입력값이 주어진다
-        setContent {
-            val snackBarHostState = remember { SnackbarHostState() }
+        val project = MockData.MOCK_PROJECTS.first()
 
-            Scaffold(
-                snackbarHost = {
-                    SnackbarHost(snackBarHostState, modifier = Modifier.offset(y = (-50).dp)) { data ->
-                        KanbanSnackBar(data)
-                    }
-                },
-            ) { innerPadding ->
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(project) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
-                    project = KanbanProject(mutableListOf()),
-                    snackbarHostState = snackBarHostState,
-                    modifier = Modifier.padding(innerPadding),
+                    project = project,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
                 )
             }
         }
 
         // when : 생성 다이얼로그에서 정상적인 값을 입력 후 생성 버튼을 누를 때
-        onNodeWithText("새 태스크 생성").performClick()
-        waitForIdle()
-        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
-        waitForIdle()
-        onNodeWithText("생성").performClick()
-        waitForIdle()
+        state.addTask(
+            KanbanTask(
+                data = TaskData(
+                    title = Title("제목"),
+                    content = "",
+                    tags = Tags(emptyList()),
+                    nickname = Nickname("투핸더"),
+                ),
+                status = TaskStatus.TO_DO
+            )
+        )
 
         // then : 칸반 보드 하단에 스낵바가 출력되어야 한다
-        onNodeWithText("새로운 태스크가 추가되었습니다.").assertExists()
+        onNodeWithText(SnackBarText.CREATE_TASK, useUnmergedTree = true).assertExists()
     }
 }

@@ -25,13 +25,13 @@ import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.domain.task.TaskStatus
 
 @OptIn(ExperimentalTestApi::class)
-class KanbanProjectUiTest {
+class KanbanPageUiTest {
 
     @Test
     fun `프로젝트를 선택하면 프로젝트에 저장되어 있는 태스크들이 표시되어야 한다`() = runComposeUiTest {
         // given : 칸반 페이지가 생성된다.
         setContent {
-            KanbanPage(projects = MockData.MOCK_PROJECTS)
+            KanbanPage()
         }
 
         // when : 프로젝트 버튼을 눌렀을 때
@@ -48,7 +48,7 @@ class KanbanProjectUiTest {
     fun `프로젝트를 선택하면 보드의 제목이 변경되어야 한다`() = runComposeUiTest {
         // given : 칸반 페이지가 생성된다.
         setContent {
-            KanbanPage(projects = MockData.MOCK_PROJECTS)
+            KanbanPage()
         }
 
         // when : 가장 처음 프로젝트의 제목이 표시되고 다른 프로젝트 버튼을 눌렀을 때
@@ -91,7 +91,7 @@ class KanbanProjectUiTest {
 
         setContent {
             snackbarHostState = remember { SnackbarHostState() }
-            state = remember { BoardState(project.project) }
+            state = remember { BoardState(project) }
 
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
@@ -104,7 +104,7 @@ class KanbanProjectUiTest {
         }
 
         // when : 상태 변경 함수를 호출했을 때
-        state.changeTask(newStatus = TaskStatus.DONE, 0)
+        state.changeTaskStatus(0, TaskStatus.IN_PROGRESS)
 
         // then : "태스크가 이동되었습니다" 스낵바가 출력되어야 한다.
         onNodeWithText(SnackBarText.EDIT_TASK, useUnmergedTree = true).assertExists()
