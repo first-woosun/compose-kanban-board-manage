@@ -35,14 +35,14 @@ Done
 
 ## 기능 구현 목록
 
-- [ ] Task 상태 변경 규칙
-    - [ ] To Do는 In Progress로만 변경할 수 있다.
-        - [ ] To Do 상태에서 변경이 일어날 때 담당자가 지정되어야 한다.
-    - [ ] In Progress는 To Do로 변경할 수 있다.
-    - [ ] In Progress는 Review로 변경할 수 있다.
-    - [ ] Review는 In Progress로 변경될 수 있다.
-    - [ ] Review는 Done으로 변경될 수 있다.
-    - [ ] Done은 To Do로 변경될 수 있다.
+- [x] Task의 taskData의 내용을 변경할 수 있어야한다.
+- [x] Task 상태 변경 규칙
+    - [x] To Do는 In Progress로만 변경할 수 있다.
+    - [x] In Progress는 To Do로 변경할 수 있다.
+    - [x] In Progress는 Review로 변경할 수 있다.
+    - [x] Review는 In Progress로 변경될 수 있다.
+    - [x] Review는 Done으로 변경될 수 있다.
+    - [x] Done은 To Do로 변경될 수 있다.
 - [ ] Task 상태 별 삭제 규칙
     - [ ] To Do테스크는 삭제할 수 있다.
     - [ ] In Progress는 삭제할 수 있다.
