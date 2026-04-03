@@ -27,4 +27,11 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
     fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus) {
         _project[targetIndex] = _project[targetIndex].changeStatus(targetStatus)
     }
+
+    fun deleteTask(targetIndex: Int) {
+        if(!_project[targetIndex].isDeletable) {
+            throw IllegalDeleteException()
+        }
+        _project.removeAt(targetIndex)
+    }
 }

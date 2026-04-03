@@ -1,11 +1,13 @@
 package woowacourse.kanban.domain.task
 
 interface TaskRules {
+    val isDeletable: Boolean
 
     fun moveTo(targetStatus: TaskStatus): TaskRules
 }
 
 class Todo: TaskRules {
+    override val isDeletable: Boolean = true
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
         return when(targetStatus) {
@@ -17,6 +19,7 @@ class Todo: TaskRules {
 }
 
 class InProgress: TaskRules {
+    override val isDeletable: Boolean = true
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
         return when(targetStatus) {
@@ -29,6 +32,7 @@ class InProgress: TaskRules {
 }
 
 class Review: TaskRules {
+    override val isDeletable: Boolean = false
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
         return when(targetStatus) {
@@ -41,6 +45,7 @@ class Review: TaskRules {
 }
 
 class Done: TaskRules {
+    override val isDeletable: Boolean = false
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
         return when(targetStatus) {

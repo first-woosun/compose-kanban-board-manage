@@ -43,11 +43,11 @@ Done
     - [x] Review는 In Progress로 변경될 수 있다.
     - [x] Review는 Done으로 변경될 수 있다.
     - [x] Done은 To Do로 변경될 수 있다.
-- [ ] Task 상태 별 삭제 규칙
-    - [ ] To Do테스크는 삭제할 수 있다.
-    - [ ] In Progress는 삭제할 수 있다.
-    - [ ] Review는 삭제할 수 없다.
-    - [ ] Done은 삭제할 수 없다.
+- [x] Task 상태 별 삭제 규칙
+    - [x] To Do테스크는 삭제할 수 있다.
+    - [x] In Progress는 삭제할 수 있다.
+    - [x] Review는 삭제할 수 없다.
+    - [x] Done은 삭제할 수 없다.
 - [ ] Task 상태 별 담당자 지정 규칙
     - [ ] To Do는 담당자가 지정되지 않아도 Task를 생성할 수 있다.
     - [ ] In Progress는 담당자가 지정되지 않으면 Task를 생성할 수 없다.
