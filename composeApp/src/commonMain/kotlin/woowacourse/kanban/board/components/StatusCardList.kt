@@ -40,6 +40,7 @@ private val TaskStatus.displayName: String
     get() = when (this) {
         TaskStatus.TO_DO -> "To Do"
         TaskStatus.IN_PROGRESS -> "In Progress"
+        TaskStatus.REVIEW -> "Review"
         TaskStatus.DONE -> "Done"
     }
 
@@ -47,6 +48,7 @@ private val TaskStatus.titleColor: Color
     get() = when (this) {
         TaskStatus.TO_DO -> Colors.StatusBgToDo
         TaskStatus.IN_PROGRESS -> Colors.StatusBgInProgress
+        TaskStatus.REVIEW -> Colors.StatusBgReview
         TaskStatus.DONE -> Colors.StatusBgDone
     }
 
@@ -54,6 +56,7 @@ private val TaskStatus.bgColor: Color
     get() = when (this) {
         TaskStatus.TO_DO -> Colors.StatusListBgToDo
         TaskStatus.IN_PROGRESS -> Colors.StatusListBgInProgress
+        TaskStatus.REVIEW -> Colors.StatusListBgReview
         TaskStatus.DONE -> Colors.StatusListBgDone
     }
 
@@ -61,6 +64,7 @@ private val TaskStatus.borderColor: Color
     get() = when (this) {
         TaskStatus.TO_DO -> Colors.StatusListBorderToDo
         TaskStatus.IN_PROGRESS -> Colors.StatusListBorderInProgress
+        TaskStatus.REVIEW -> Colors.StatusListBorderReview
         TaskStatus.DONE -> Colors.StatusListBorderDone
     }
 
