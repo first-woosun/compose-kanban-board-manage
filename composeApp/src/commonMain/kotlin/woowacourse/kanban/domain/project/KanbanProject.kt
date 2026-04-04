@@ -2,6 +2,7 @@ package woowacourse.kanban.domain.project
 
 import java.util.UUID
 import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 
 class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: String = "") {
@@ -30,9 +31,13 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
         _project[targetIndex] = _project[targetIndex].changeStatus(targetStatus)
     }
 
+    fun changeTaskData(targetIndex: Int, newData: TaskData) {
+        _project[targetIndex] = _project[targetIndex].changeData(newData)
+    }
+
     fun editTask(targetId: UUID, inputTask: KanbanTask) {
-        getTaskWithID(targetId).changeData(inputTask.data)
         changeTaskStatus(getTaskIndexWithId(targetId), inputTask.status)
+        changeTaskData(getTaskIndexWithId(targetId), inputTask.data)
     }
 
     fun deleteTask(targetId: UUID) {
