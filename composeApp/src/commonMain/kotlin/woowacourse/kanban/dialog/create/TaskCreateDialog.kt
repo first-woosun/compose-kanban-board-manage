@@ -1,4 +1,4 @@
-package woowacourse.kanban.create
+package woowacourse.kanban.dialog.create
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,12 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import woowacourse.kanban.create.components.DialogBar
-import woowacourse.kanban.create.components.FooterRow
-import woowacourse.kanban.create.components.createTextInput.CreateTextInput
-import woowacourse.kanban.create.components.radioSelector.CoachButton
-import woowacourse.kanban.create.components.radioSelector.RadioSelector
-import woowacourse.kanban.create.components.radioSelector.StatusButton
+import woowacourse.kanban.dialog.components.CreateFooterRow
+import woowacourse.kanban.dialog.components.DialogBar
+import woowacourse.kanban.dialog.components.createTextInput.CreateTextInput
+import woowacourse.kanban.dialog.components.radioSelector.CoachButton
+import woowacourse.kanban.dialog.components.radioSelector.RadioSelector
+import woowacourse.kanban.dialog.components.radioSelector.StatusButton
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
@@ -47,6 +47,7 @@ fun TaskCreateDialog(
                 ),
         ) {
             DialogBar(
+                text = "새 태스크 생성",
                 modifier = Modifier.padding(
                     vertical = 28.dp,
                     horizontal = 24.dp,
@@ -110,7 +111,7 @@ fun TaskCreateDialog(
                     )
                 }
                 HorizontalDivider()
-                FooterRow(
+                CreateFooterRow(
                     onCancel = { onDismiss() },
                     onCreate = {
                         val isError = state.onCreateValidate()
@@ -129,11 +130,12 @@ fun TaskCreateDialog(
     }
 }
 
-@Preview
+@Preview(widthDp = 1000, heightDp = 1000)
 @Composable
 fun TaskCreateDialogPreview() {
     TaskCreateDialog(
         onDismiss = { },
         onCreateTask = { },
+        assignees = Assignee.entries
     )
 }

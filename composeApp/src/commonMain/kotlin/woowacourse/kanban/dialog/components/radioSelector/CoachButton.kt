@@ -1,4 +1,4 @@
-package woowacourse.kanban.create.components.radioSelector
+package woowacourse.kanban.dialog.components.radioSelector
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -72,12 +72,14 @@ fun CoachButton(
             ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = Icons.Default.AccountCircle,
-                contentDescription = "코치 프로필 아이콘",
-                tint = Colors.IconTertiary,
-            )
-            Spacer(modifier = Modifier.width(12.dp))
+            if(assignee != Assignee.NONE){
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "코치 프로필 아이콘",
+                    tint = Colors.IconTertiary,
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+            }
             Text(
                 assignee.toNickName,
                 fontWeight = FontWeight.W500,

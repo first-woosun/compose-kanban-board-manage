@@ -1,4 +1,4 @@
-package woowacourse.kanban.create
+package woowacourse.kanban.dialog
 
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -12,11 +12,11 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
-import woowacourse.kanban.create.components.radioSelector.CoachButton
-import woowacourse.kanban.create.components.radioSelector.RadioSelector
-import woowacourse.kanban.create.components.radioSelector.StatusButton
+import woowacourse.kanban.dialog.components.radioSelector.CoachButton
+import woowacourse.kanban.dialog.components.radioSelector.RadioSelector
+import woowacourse.kanban.dialog.components.radioSelector.StatusButton
+import woowacourse.kanban.dialog.create.TaskCreateDialog
 import woowacourse.kanban.domain.task.Assignee
-import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.TaskStatus
 
 @OptIn(ExperimentalTestApi::class)
