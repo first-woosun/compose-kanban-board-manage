@@ -72,6 +72,7 @@ private val TaskStatus.borderColor: Color
 fun StatusCardList(
     tasks: List<KanbanTask>,
     status: TaskStatus,
+    onCardClick: (KanbanTask) -> Unit,
     modifier: Modifier = Modifier,
     getIsDropTarget: () -> Boolean = { false },
     onBoundsChanged: (Rect) -> Unit = {},
@@ -149,6 +150,7 @@ fun StatusCardList(
             items(count = tasks.size, key = { tasks[it].data.id }) {
                 KanbanCard(
                     tasks[it].data,
+                    onClick = { onCardClick(tasks[it]) },
                     onDragStart = {
                         onTaskDragStart(tasks[it])
                     },
@@ -167,5 +169,6 @@ private fun StatusCardListPreview() {
     StatusCardList(
         tasks = emptyList(),
         status = TaskStatus.TO_DO,
+        onCardClick = {},
     )
 }

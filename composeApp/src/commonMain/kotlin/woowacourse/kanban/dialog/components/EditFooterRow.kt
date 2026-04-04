@@ -14,7 +14,8 @@ import woowacourse.kanban.core.design.Colors
 @Composable
 fun EditFooterRow(
     onCancel: () -> Unit,
-    onCreate: () -> Unit,
+    onDelete: () -> Unit,
+    onEdit: () -> Unit,
     isCreateError: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -35,7 +36,7 @@ fun EditFooterRow(
             text = "삭제",
             textColor = Color.White,
             backgroundColor = Colors.DeleteButton,
-            onClick = onCreate,
+            onClick = onDelete,
             enabled = !isCreateError,
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -44,7 +45,7 @@ fun EditFooterRow(
             text = "수정",
             textColor = Color.White,
             backgroundColor = if (isCreateError) Colors.ActionPrimaryDisabled else Colors.ActionPrimary,
-            onClick = onCreate,
+            onClick = onEdit,
             enabled = !isCreateError,
         )
     }

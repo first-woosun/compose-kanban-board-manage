@@ -7,7 +7,9 @@ import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.utils.SnackBarEvent
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
+import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
+import java.util.UUID
 
 class BoardState(project: KanbanProject) {
 
@@ -15,10 +17,18 @@ class BoardState(project: KanbanProject) {
 
     private val showDialog = mutableStateOf(false)
 
+    private val isEditTask = mutableStateOf(false)
+
     fun showDialogValue() = showDialog.value
+
+    fun isEditTaskValue() = isEditTask.value
 
     fun toggleDialog() {
         showDialog.value = !showDialog.value
+    }
+
+    fun toggleEditTask() {
+        isEditTask.value = !isEditTask.value
     }
 
     var snackBarEvent by mutableStateOf<SnackBarEvent?>(null)
@@ -28,6 +38,11 @@ class BoardState(project: KanbanProject) {
         snackBarEvent = SnackBarEvent(message = message)
     }
 
+    fun getTaskWithId(targetId: UUID): KanbanTask {
+        return totalTasks.value.getTaskWithID(targetId)
+    }
+
+
     fun addTask(inputTask: KanbanTask) {
         totalTasks.value.addTask(inputTask)
         snackBarTrigger(SnackBarText.CREATE_TASK)
@@ -35,6 +50,18 @@ class BoardState(project: KanbanProject) {
 
     fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus) {
         totalTasks.value.changeTaskStatus(targetIndex, targetStatus)
-        snackBarTrigger(SnackBarText.EDIT_TASK)
+        snackBarTrigger(SnackBarText.MOVE_TASK)
+    }
+
+    fun deleteTask(targetId: UUID) {
+        totalTasks.value.deleteTask(targetId)
+
+        toggleDialog()
+    }
+
+    fun editTask(targetId: UUID, inputTask: KanbanTask) {
+        totalTasks.value.editTask(targetId, inputTask)
+
+        toggleDialog()
     }
 }

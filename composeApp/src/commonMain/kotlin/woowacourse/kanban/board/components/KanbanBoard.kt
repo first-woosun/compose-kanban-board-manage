@@ -9,6 +9,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,10 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.dialog.create.TaskCreateDialog
+import woowacourse.kanban.dialog.edit.TaskEditDialog
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -36,6 +39,7 @@ fun KanbanBoard(
 
     val state = remember(project) { boardState }
 
+    var clickedTaskId by remember { mutableStateOf(null as UUID?) }
     var draggedTask by remember { mutableStateOf<KanbanTask?>(null) }
     var currentDragPosition by remember { mutableStateOf<Offset?>(null) }
     val columnBounds = remember { mutableStateMapOf<TaskStatus, Rect>() }
@@ -62,6 +66,11 @@ fun KanbanBoard(
                 StatusCardList(
                     tasks = project.getTasksWithStatus(status),
                     status = status,
+                    onCardClick = {
+                        state.toggleDialog()
+                        state.toggleEditTask()
+                        clickedTaskId = it.data.id
+                    },
                     modifier = Modifier.weight(1f),
                     getIsDropTarget = {
                         currentDragPosition?.let { columnBounds[status]?.contains(it) }
@@ -99,14 +108,27 @@ fun KanbanBoard(
     }
 
     if (state.showDialogValue()) {
-        TaskCreateDialog(
-            onDismiss = { state.toggleDialog() },
-            onCreateTask = { task ->
-                state.addTask(task)
-            },
-            assignees = Assignee.entries,
-            modifier = Modifier,
-        )
+        if (state.isEditTaskValue()) {
+            TaskEditDialog(
+                targetTask = state.getTaskWithId(clickedTaskId!!),
+                onDismiss = {
+                    state.toggleDialog()
+                    state.toggleEditTask()
+                },
+                onDeleteTask = { state.deleteTask(clickedTaskId!!) },
+                onEditTask = { state.editTask(clickedTaskId!!, it) },
+                assignees = if(state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries else Assignee.entries.subList(1, 2),
+            )
+        } else {
+            TaskCreateDialog(
+                onDismiss = { state.toggleDialog() },
+                onCreateTask = { task ->
+                    state.addTask(task)
+                },
+                assignees = Assignee.entries,
+                modifier = Modifier,
+            )
+        }
     }
 }
 

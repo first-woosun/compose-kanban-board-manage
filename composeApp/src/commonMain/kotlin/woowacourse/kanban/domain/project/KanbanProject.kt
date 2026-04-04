@@ -20,6 +20,8 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
         return if (project.isEmpty()) 0.0 else getTasksWithStatus(TaskStatus.DONE).size.toDouble() / project.size.toDouble()
     }
 
+    fun getTaskWithID(targetId: UUID) = project.first { it.data.id == targetId }
+
     fun addTask(inputTask: KanbanTask) {
         _project.add(inputTask)
     }
@@ -28,10 +30,14 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
         _project[targetIndex] = _project[targetIndex].changeStatus(targetStatus)
     }
 
-    fun deleteTask(targetIndex: Int) {
-        if(!_project[targetIndex].isDeletable) {
+    fun editTask(targetId: UUID, inputTask: KanbanTask) {
+        _project[getTaskIndexWithId(targetId)] = inputTask
+    }
+
+    fun deleteTask(targetId: UUID) {
+        if(!getTaskWithID(targetId).isDeletable) {
             throw IllegalDeleteException()
         }
-        _project.removeAt(targetIndex)
+        _project.removeAt(getTaskIndexWithId(targetId))
     }
 }

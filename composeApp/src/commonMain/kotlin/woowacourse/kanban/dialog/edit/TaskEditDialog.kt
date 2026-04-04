@@ -32,7 +32,7 @@ import woowacourse.kanban.domain.task.Title
 fun TaskEditDialog(
     targetTask: KanbanTask,
     onDismiss: () -> Unit,
-    onDeleteTask:() -> Unit,
+    onDeleteTask: (KanbanTask) -> Unit,
     onEditTask: (task: KanbanTask) -> Unit,
     modifier: Modifier = Modifier,
     assignees: List<Assignee> = emptyList(),
@@ -121,7 +121,8 @@ fun TaskEditDialog(
                 HorizontalDivider()
                 EditFooterRow(
                     onCancel = { onDismiss() },
-                    onCreate = {
+                    onDelete = { onDeleteTask(targetTask) },
+                    onEdit = {
                         val isError = state.onCreateValidate()
                         if (isError.not()) {
                             val task = state.taskCreate(

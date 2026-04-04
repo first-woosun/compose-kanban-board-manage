@@ -63,11 +63,11 @@ Done
         - [x] 수정할 태스크가 To Do 상태인 경우 담당자 선택 영역에 없음 버튼이 표시된다.
         - [x] 수정할 태스크가 To Do 상태가 아닌 경우 담당자 선택 영역에 없음 버튼이 표시되지 않는다.
 
-- [] Task Create/Edit Action
-  - [] 새 태스크 생성 버튼을 클릭하면 TaskCreateDialog가 열린다.
-  - [] 태스크 카드를 클릭하면 TaskEditDialog가 열린다.
-  - [] TaskEditDialog에서 삭제 버튼을 클릭하면 Task가 삭제되고 다이얼로그가 닫힌다
-  - [] TaskEditDialog에서 수정 버튼을 클릭하면 Task가 수정되고 다이얼로그가 닫힌다.
+- [x] Task Create/Edit Action
+  - [x] 새 태스크 생성 버튼을 클릭하면 TaskCreateDialog가 열린다.
+  - [x] 태스크 카드를 클릭하면 TaskEditDialog가 열린다.
+  - [x] TaskEditDialog에서 삭제 버튼을 클릭하면 Task가 삭제되고 다이얼로그가 닫힌다
+  - [x] TaskEditDialog에서 수정 버튼을 클릭하면 Task가 수정되고 다이얼로그가 닫힌다.
 
 - [ ] SnackBar
     - [ ] Done 상태인 Task를 삭제하려고 하면 “해당 상태에서는 태스크 삭제가 불가합니다.” SnackBar가 표시되어야 한다.
@@ -76,5 +76,6 @@ Done
     - [ ] 담당자를 지정하지 않고 In Progress 상태로 변경하려 하면 "담당자를 지정해야 상태를 옮길 수 있습니다." SnackBar가 표시되어야 한다.
     - [ ] 태스크의 내용이 수정되면 "태스크가 수정되었습니다." SnackBar가 표시되어야 한다.
     - [ ] 태스크가 삭제되면 "태스크가 삭제되었습니다." SnackBar가 표시되어야 한다.
+
 - [x] KanbanBoardCard
   - [x] 담당자가 NONE이면 구분선과 담당자가 표시되지 않는다.
