@@ -117,7 +117,8 @@ fun KanbanBoard(
                 },
                 onDeleteTask = { state.deleteTask(clickedTaskId!!) },
                 onEditTask = { state.editTask(clickedTaskId!!, it) },
-                assignees = if(state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries else Assignee.entries.subList(1, 2),
+                assignees = if(state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries
+                            else Assignee.entries - Assignee.NONE,
             )
         } else {
             TaskCreateDialog(
