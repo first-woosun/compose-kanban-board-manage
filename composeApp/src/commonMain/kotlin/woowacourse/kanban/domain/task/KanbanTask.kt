@@ -8,15 +8,29 @@ data class KanbanTask(val data: TaskData, val status: TaskStatus) {
         TaskStatus.DONE -> Done()
     }
 
+    init {
+        validateAssignee(taskRules, data)
+    }
+
+    private fun validateAssignee(taskRules: TaskRules, data: TaskData) {
+        if (taskRules.requireAssignee && data.assignee == Assignee.NONE) throw IllegalArgumentException()
+    }
+
     val isDeletable get() = taskRules.isDeletable
 
 
     fun changeStatus(targetStatue: TaskStatus): KanbanTask {
-        taskRules = taskRules.moveTo(targetStatue)
+        val nextRules = taskRules.moveTo(targetStatue)
+
+        validateAssignee(nextRules, data)
+        taskRules = nextRules
+
         return copy(status = targetStatue)
     }
 
     fun changeData(data: TaskData): KanbanTask {
+        validateAssignee(taskRules, data)
+
         return copy(data = data)
     }
 }

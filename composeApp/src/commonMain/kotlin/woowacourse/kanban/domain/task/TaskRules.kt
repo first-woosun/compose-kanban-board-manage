@@ -4,6 +4,8 @@ interface TaskRules {
     val isDeletable: Boolean
 
     fun moveTo(targetStatus: TaskStatus): TaskRules
+
+    val requireAssignee: Boolean
 }
 
 class Todo: TaskRules {
@@ -16,6 +18,8 @@ class Todo: TaskRules {
             TaskStatus.REVIEW, TaskStatus.DONE -> throw IllegalStateException()
         }
     }
+
+    override val requireAssignee: Boolean = false
 }
 
 class InProgress: TaskRules {
@@ -29,6 +33,8 @@ class InProgress: TaskRules {
             TaskStatus.DONE -> throw IllegalStateException()
         }
     }
+
+    override val requireAssignee: Boolean = true
 }
 
 class Review: TaskRules {
@@ -42,6 +48,8 @@ class Review: TaskRules {
             TaskStatus.TO_DO -> throw IllegalStateException()
         }
     }
+
+    override val requireAssignee: Boolean = true
 }
 
 class Done: TaskRules {
@@ -54,4 +62,6 @@ class Done: TaskRules {
             TaskStatus.REVIEW, TaskStatus.IN_PROGRESS -> throw IllegalStateException()
         }
     }
+
+    override val requireAssignee: Boolean = true
 }
