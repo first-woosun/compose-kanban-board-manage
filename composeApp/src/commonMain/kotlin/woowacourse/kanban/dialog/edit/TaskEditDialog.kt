@@ -121,7 +121,10 @@ fun TaskEditDialog(
                 HorizontalDivider()
                 EditFooterRow(
                     onCancel = { onDismiss() },
-                    onDelete = { onDeleteTask(targetTask) },
+                    onDelete = {
+                        onDeleteTask(targetTask)
+                        onDismiss()
+                    },
                     onEdit = {
                         val isError = state.onCreateValidate()
                         if (isError.not()) {

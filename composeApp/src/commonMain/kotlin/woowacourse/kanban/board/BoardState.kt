@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.utils.SnackBarEvent
+import woowacourse.kanban.domain.project.IllegalDeleteException
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskData
@@ -49,19 +50,27 @@ class BoardState(project: KanbanProject) {
     }
 
     fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus) {
-        totalTasks.value.changeTaskStatus(targetIndex, targetStatus)
-        snackBarTrigger(SnackBarText.MOVE_TASK)
+        try {
+            totalTasks.value.changeTaskStatus(targetIndex, targetStatus)
+            snackBarTrigger(SnackBarText.MOVE_TASK)
+        } catch (e: IllegalStateException) {
+            snackBarTrigger(SnackBarText.INVALID_MOVE_TASK)
+        } catch (e: IllegalArgumentException) {
+            snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
+        }
     }
 
     fun deleteTask(targetId: UUID) {
-        totalTasks.value.deleteTask(targetId)
+        try {
+            totalTasks.value.deleteTask(targetId)
+        } catch (e: IllegalDeleteException) {
+            snackBarTrigger(SnackBarText.INVALID_DELETE_TASK)
+        }
 
-        toggleDialog()
     }
 
     fun editTask(targetId: UUID, inputTask: KanbanTask) {
         totalTasks.value.editTask(targetId, inputTask)
-
-        toggleDialog()
+        snackBarTrigger(SnackBarText.EDIT_TASK)
     }
 }
