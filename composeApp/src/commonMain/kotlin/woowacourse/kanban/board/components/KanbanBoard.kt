@@ -19,8 +19,7 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.BoardState
-import woowacourse.kanban.board.constant.MockData
-import woowacourse.kanban.create.TaskCreateDialog
+import woowacourse.kanban.dialog.create.TaskCreateDialog
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask

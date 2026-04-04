@@ -23,9 +23,11 @@ object Colors {
     val TextFieldPlaceholder = Color(0xFFAAAAAA)
     val TextFieldHint = Color(0xFF49454F)
 
-    // 액션 색상
+    // 생성 버튼 색상
     val ActionPrimary = Color(0xFF4F39F6)
     val ActionPrimaryDisabled = Color(0xFFA7A4BC)
+
+    val DeleteButton = Color(0xFFDB6365)
 
     // 아이콘 색상
     val IconSecondary = Color(0xFF6A7282)
