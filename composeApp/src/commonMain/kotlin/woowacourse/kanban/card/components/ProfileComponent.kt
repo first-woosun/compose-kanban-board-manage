@@ -17,7 +17,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.core.design.Colors
-import woowacourse.kanban.domain.task.Nickname
 
 @Composable
 fun Profile(nickname: String, modifier: Modifier = Modifier) {
