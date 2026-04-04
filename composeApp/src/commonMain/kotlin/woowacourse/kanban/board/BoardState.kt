@@ -8,7 +8,6 @@ import woowacourse.kanban.board.utils.SnackBarEvent
 import woowacourse.kanban.domain.project.IllegalDeleteException
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
-import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import java.util.UUID
 
@@ -44,9 +43,13 @@ class BoardState(project: KanbanProject) {
     }
 
 
-    fun addTask(inputTask: KanbanTask) {
-        totalTasks.value.addTask(inputTask)
-        snackBarTrigger(SnackBarText.CREATE_TASK)
+    fun addTask(inputTask: () -> KanbanTask) {
+        try {
+            totalTasks.value.addTask(inputTask())
+            snackBarTrigger(SnackBarText.CREATE_TASK)
+        } catch (e: IllegalArgumentException) {
+            snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
+        }
     }
 
     fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus) {
@@ -56,25 +59,26 @@ class BoardState(project: KanbanProject) {
         } catch (e: IllegalStateException) {
             snackBarTrigger(SnackBarText.INVALID_MOVE_TASK)
         } catch (e: IllegalArgumentException) {
-            snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
+            snackBarTrigger(SnackBarText.NONE_ASSIGNEE_MOVE)
         }
     }
 
     fun deleteTask(targetId: UUID) {
         try {
             totalTasks.value.deleteTask(targetId)
+            snackBarTrigger(SnackBarText.DELETE_TASK)
         } catch (e: IllegalDeleteException) {
             snackBarTrigger(SnackBarText.INVALID_DELETE_TASK)
         }
 
     }
 
-    fun editTask(targetId: UUID, inputTask: KanbanTask) {
+    fun editTask(targetId: UUID, inputTask: () -> KanbanTask) {
         try {
             totalTasks.value.editTask(targetId, inputTask)
             snackBarTrigger(SnackBarText.EDIT_TASK)
         } catch (e: IllegalArgumentException) {
-            snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
+            snackBarTrigger(SnackBarText.NONE_ASSIGNEE_MOVE)
         } catch (e: IllegalStateException) {
             snackBarTrigger(SnackBarText.INVALID_MOVE_TASK)
         }

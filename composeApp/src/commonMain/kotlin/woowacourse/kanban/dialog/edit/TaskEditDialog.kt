@@ -33,7 +33,7 @@ fun TaskEditDialog(
     targetTask: KanbanTask,
     onDismiss: () -> Unit,
     onDeleteTask: (KanbanTask) -> Unit,
-    onEditTask: (task: KanbanTask) -> Unit,
+    onEditTask: (() -> KanbanTask) -> Unit,
     modifier: Modifier = Modifier,
     assignees: List<Assignee> = emptyList(),
 ) {
@@ -128,10 +128,11 @@ fun TaskEditDialog(
                     onEdit = {
                         val isError = state.onCreateValidate()
                         if (isError.not()) {
-                            val task = state.taskCreate(
-                                assignee = assignees[state.selectedAssigneeIndex],
-                            )
-                            onEditTask(task)
+                            onEditTask {
+                                state.taskCreate(
+                                    assignee = assignees[state.selectedAssigneeIndex]
+                                )
+                            }
                             onDismiss()
                         }
                     },

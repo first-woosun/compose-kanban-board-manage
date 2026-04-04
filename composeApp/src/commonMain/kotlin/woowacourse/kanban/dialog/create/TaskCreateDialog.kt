@@ -28,7 +28,7 @@ import woowacourse.kanban.domain.task.TaskStatus
 @Composable
 fun TaskCreateDialog(
     onDismiss: () -> Unit,
-    onCreateTask: (task: KanbanTask) -> Unit,
+    onCreateTask: (() -> KanbanTask) -> Unit,
     modifier: Modifier = Modifier,
     assignees: List<Assignee> = emptyList(),
 ) {
@@ -116,10 +116,11 @@ fun TaskCreateDialog(
                     onCreate = {
                         val isError = state.onCreateValidate()
                         if (isError.not()) {
-                            val task = state.taskCreate(
-                                assignee = assignees[state.selectedAssigneeIndex],
-                            )
-                            onCreateTask(task)
+                            onCreateTask {
+                                state.taskCreate(
+                                    assignee = assignees[state.selectedAssigneeIndex]
+                                )
+                            }
                             onDismiss()
                         }
                     },

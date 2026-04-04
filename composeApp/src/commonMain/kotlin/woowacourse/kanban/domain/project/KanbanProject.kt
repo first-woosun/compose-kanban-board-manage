@@ -35,9 +35,9 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
         _project[targetIndex] = _project[targetIndex].changeData(newData)
     }
 
-    fun editTask(targetId: UUID, inputTask: KanbanTask) {
-        changeTaskStatus(getTaskIndexWithId(targetId), inputTask.status)
-        changeTaskData(getTaskIndexWithId(targetId), inputTask.data)
+    fun editTask(targetId: UUID, inputTask: () -> KanbanTask) {
+        changeTaskStatus(getTaskIndexWithId(targetId), inputTask().status)
+        changeTaskData(getTaskIndexWithId(targetId), inputTask().data)
     }
 
     fun deleteTask(targetId: UUID) {

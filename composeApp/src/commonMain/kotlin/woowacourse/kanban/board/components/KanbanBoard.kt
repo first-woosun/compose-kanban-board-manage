@@ -9,7 +9,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -116,15 +115,18 @@ fun KanbanBoard(
                     state.toggleEditTask()
                 },
                 onDeleteTask = { state.deleteTask(clickedTaskId!!) },
-                onEditTask = { state.editTask(clickedTaskId!!, it) },
+                onEditTask = { taskCreator ->
+                    state.editTask(clickedTaskId!!, taskCreator)
+
+                },
                 assignees = if(state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries
                             else Assignee.entries - Assignee.NONE,
             )
         } else {
             TaskCreateDialog(
                 onDismiss = { state.toggleDialog() },
-                onCreateTask = { task ->
-                    state.addTask(task)
+                onCreateTask = { taskCreator ->
+                    state.addTask(taskCreator)
                 },
                 assignees = Assignee.entries,
                 modifier = Modifier,
