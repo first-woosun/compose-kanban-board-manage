@@ -70,7 +70,13 @@ class BoardState(project: KanbanProject) {
     }
 
     fun editTask(targetId: UUID, inputTask: KanbanTask) {
-        totalTasks.value.editTask(targetId, inputTask)
-        snackBarTrigger(SnackBarText.EDIT_TASK)
+        try {
+            totalTasks.value.editTask(targetId, inputTask)
+            snackBarTrigger(SnackBarText.EDIT_TASK)
+        } catch (e: IllegalArgumentException) {
+            snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
+        } catch (e: IllegalStateException) {
+            snackBarTrigger(SnackBarText.INVALID_MOVE_TASK)
+        }
     }
 }
