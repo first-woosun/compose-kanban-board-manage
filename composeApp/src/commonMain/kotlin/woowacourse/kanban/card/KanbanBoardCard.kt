@@ -117,14 +117,16 @@ fun KanbanCard(
                 )
             }
 
-            // 구분선
-            HorizontalDivider(thickness = 2.dp)
+            if (board.assignee != Assignee.NONE) {
+                // 구분선
+                HorizontalDivider(thickness = 2.dp)
 
-            // 작성자
-            Profile(
-                nickname = board.assignee.toNickName,
-                modifier = Modifier.padding(vertical = 8.dp).testTag("프로필"),
-            )
+                // 작성자
+                Profile(
+                    nickname = board.assignee.toNickName,
+                    modifier = Modifier.padding(vertical = 8.dp).testTag("프로필"),
+                )
+            }
         }
     }
 }
@@ -135,7 +137,7 @@ class BoardPreviewParameterProvider : PreviewParameterProvider<TaskData> {
             title = Title(DEFAULT_TITLE),
             content = DEFAULT_CONTENT,
             tags = Tags(listOf("컴포넌트", "성능")),
-            assignee = Assignee.DINO,
+            assignee = Assignee.NONE,
         ),
         TaskData(
             title = Title(DEFAULT_TITLE),
