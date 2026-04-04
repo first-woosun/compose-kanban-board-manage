@@ -62,10 +62,7 @@ class DialogTest {
     fun `담당자 버튼을 클릭 했을 때 다른 상태 버튼은 선택되지 않아야 한다`() = runComposeUiTest {
         var selectedCoachIndex = mutableIntStateOf(0)
         // given
-        val assignees = listOf(
-            Assignee(Nickname("다이노")),
-            Assignee(Nickname("페임스")),
-        )
+        val assignees = Assignee.entries
 
         setContent {
             RadioSelector(

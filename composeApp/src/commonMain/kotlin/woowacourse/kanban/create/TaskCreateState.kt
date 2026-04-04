@@ -79,7 +79,7 @@ class TaskCreateState {
                 tags = Tags(
                     if (tagInputValue.isNotBlank()) tagInputValue.split(",").map { it.trim() } else emptyList(),
                 ),
-                nickname = assignee.nickname,
+                assignee = assignee,
             ),
             status = TaskStatus.entries[selectedStatusIndex],
         )

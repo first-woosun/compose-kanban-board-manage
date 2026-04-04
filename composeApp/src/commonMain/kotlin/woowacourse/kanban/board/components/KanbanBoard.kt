@@ -22,6 +22,7 @@ import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.create.TaskCreateDialog
 import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
@@ -104,7 +105,7 @@ fun KanbanBoard(
             onCreateTask = { task ->
                 state.addTask(task)
             },
-            assignees = MockData.ASSIGNEES,
+            assignees = Assignee.entries,
             modifier = Modifier,
         )
     }

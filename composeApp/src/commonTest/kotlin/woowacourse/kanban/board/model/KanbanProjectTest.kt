@@ -1,5 +1,6 @@
 package woowacourse.kanban.board.model
 
+import androidx.compose.material3.AssistChip
 import kotlin.test.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -8,6 +9,7 @@ import org.junit.Test
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.IllegalDeleteException
 import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -26,7 +28,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.NONE,
                 ),
                 status = TaskStatus.DONE,
             ),
@@ -43,7 +45,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.DINO
                 ),
                 status = TaskStatus.IN_PROGRESS,
                 )
@@ -64,7 +66,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.TO_DO),
             )
@@ -86,7 +88,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.IN_PROGRESS),
             )
@@ -108,7 +110,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.REVIEW),
             )
@@ -128,7 +130,7 @@ class KanbanProjectTest {
                     title = Title("제목"),
                     content = "내용",
                     tags = Tags(),
-                    nickname = Nickname("아오"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.DONE),
             )

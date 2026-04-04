@@ -20,6 +20,7 @@ import woowacourse.kanban.board.components.KanbanSnackBar
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.domain.project.KanbanProject
+import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
@@ -75,7 +76,7 @@ class BoardUiTest {
                     title = Title("title"),
                     content = "",
                     tags = Tags(emptyList()),
-                    nickname = Nickname("투핸더"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.TO_DO
             )
@@ -114,7 +115,7 @@ class BoardUiTest {
                     title = Title("제목"),
                     content = "",
                     tags = Tags(emptyList()),
-                    nickname = Nickname("투핸더"),
+                    assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.TO_DO
             )

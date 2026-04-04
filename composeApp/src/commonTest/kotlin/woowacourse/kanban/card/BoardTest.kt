@@ -8,6 +8,7 @@ import kotlin.test.Test
 import woowacourse.kanban.card.constant.DEFAULT_CONTENT
 import woowacourse.kanban.card.constant.DEFAULT_NAME
 import woowacourse.kanban.card.constant.DEFAULT_TITLE
+import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
@@ -25,7 +26,7 @@ class BoardTest {
         title = Title(title),
         content = content,
         tags = Tags(tags),
-        nickname = Nickname(nickname),
+        assignee = Assignee.DINO,
     )
 
     @Composable

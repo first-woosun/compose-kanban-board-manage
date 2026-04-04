@@ -25,6 +25,13 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.core.design.Colors
 import woowacourse.kanban.domain.task.Assignee
 
+private val Assignee.toNickName: String
+    get() = when (this) {
+        Assignee.NONE -> "없음"
+        Assignee.DINO -> "다이노"
+        Assignee.FAMES -> "페임스"
+    }
+
 @Composable
 fun CoachButton(
     isSelected: Boolean,
@@ -72,7 +79,7 @@ fun CoachButton(
             )
             Spacer(modifier = Modifier.width(12.dp))
             Text(
-                assignee.nickname.nickname,
+                assignee.toNickName,
                 fontWeight = FontWeight.W500,
                 fontSize = 14.sp,
                 color = Colors.PrimarySubText,

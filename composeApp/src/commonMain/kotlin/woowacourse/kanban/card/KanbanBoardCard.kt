@@ -37,10 +37,18 @@ import woowacourse.kanban.card.constant.MAX_CONTENT
 import woowacourse.kanban.card.constant.MAX_NAME
 import woowacourse.kanban.card.constant.MAX_TITLE
 import woowacourse.kanban.core.design.Colors
+import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.Nickname
 import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.Title
+
+private val Assignee.toNickName: String
+    get() = when (this) {
+        Assignee.NONE -> ""
+        Assignee.DINO -> "다이노"
+        Assignee.FAMES -> "페임스"
+    }
 
 @Composable
 fun KanbanCard(
@@ -114,7 +122,7 @@ fun KanbanCard(
 
             // 작성자
             Profile(
-                nickname = board.nickname,
+                nickname = board.assignee.toNickName,
                 modifier = Modifier.padding(vertical = 8.dp).testTag("프로필"),
             )
         }
@@ -127,29 +135,29 @@ class BoardPreviewParameterProvider : PreviewParameterProvider<TaskData> {
             title = Title(DEFAULT_TITLE),
             content = DEFAULT_CONTENT,
             tags = Tags(listOf("컴포넌트", "성능")),
-            nickname = Nickname(DEFAULT_NAME),
+            assignee = Assignee.DINO,
         ),
         TaskData(
             title = Title(DEFAULT_TITLE),
             tags = Tags(listOf("컴포넌트", "성능")),
-            nickname = Nickname(DEFAULT_NAME),
+            assignee = Assignee.DINO,
         ),
         TaskData(
             title = Title(DEFAULT_TITLE),
             content = DEFAULT_CONTENT,
             tags = Tags(),
-            nickname = Nickname(DEFAULT_NAME),
+            assignee = Assignee.DINO,
         ),
         TaskData(
             title = Title(DEFAULT_TITLE),
             tags = Tags(),
-            nickname = Nickname(DEFAULT_NAME),
+            assignee = Assignee.DINO,
         ),
         TaskData(
             title = Title(MAX_TITLE),
             content = MAX_CONTENT,
             tags = Tags(listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임")),
-            nickname = Nickname(MAX_NAME),
+            assignee = Assignee.DINO,
         ),
     )
 }

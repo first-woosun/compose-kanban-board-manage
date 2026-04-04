@@ -11,18 +11,6 @@ import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
 
 object MockData {
-    val ASSIGNEES = listOf(
-        Assignee(
-            Nickname(
-                "다이노",
-            ),
-        ),
-        Assignee(
-            Nickname(
-                "페임스",
-            ),
-        ),
-    )
 
     val MOCK_PROJECTS = listOf(
         KanbanProject(
@@ -33,7 +21,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
@@ -43,7 +31,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
@@ -53,7 +41,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.TO_DO,
@@ -68,7 +56,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
@@ -78,7 +66,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
@@ -88,7 +76,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.IN_PROGRESS,
@@ -103,7 +91,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
@@ -113,7 +101,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
@@ -123,7 +111,7 @@ object MockData {
                         title = Title("제목"),
                         content = "내용",
                         tags = Tags(),
-                        nickname = Nickname("아오"),
+                        assignee = Assignee.DINO,
                         id = UUID.randomUUID(),
                     ),
                     status = TaskStatus.DONE,
