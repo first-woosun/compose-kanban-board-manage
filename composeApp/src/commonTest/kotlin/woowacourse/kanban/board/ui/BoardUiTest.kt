@@ -269,11 +269,11 @@ class BoardUiTest {
 
         setContent {
             snackbarHostState = remember { SnackbarHostState() }
-            state = remember { BoardState(todoTaskProject) }
+            state = remember { BoardState(inProgressTaskProject) }
 
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
-                    project = todoTaskProject,
+                    project = inProgressTaskProject,
                     boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
