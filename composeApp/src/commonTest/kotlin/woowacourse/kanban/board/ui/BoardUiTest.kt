@@ -232,4 +232,32 @@ class BoardUiTest {
         onNodeWithText("삭제", useUnmergedTree = true).assertExists()
         onNodeWithText("수정", useUnmergedTree = true).assertExists()
     }
+
+    @Test
+    fun `TODO 상태의 태스크를 클릭하면 다이얼로그에 담당자 없음이 표시된다`() = runComposeUiTest {
+        // given : KanbanBoard가 생성된다
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(todoTaskProject) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = todoTaskProject,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        // when : 태스크 카드를 클릭하면
+        onNodeWithText("제목", useUnmergedTree = true).performClick()
+        waitForIdle()
+
+        // then : 담당자 없음 버튼이 표시된다
+        onNodeWithText("없음", useUnmergedTree = true).assertExists()
+    }
 }
