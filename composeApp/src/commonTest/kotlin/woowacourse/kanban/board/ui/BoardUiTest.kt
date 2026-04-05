@@ -69,17 +69,15 @@ class BoardUiTest {
         }
 
         // when: 새로운 태스크가 생성됐을 때
-        state.addTask(
-            KanbanTask(
-                data = TaskData(
-                    title = Title("title"),
-                    content = "",
-                    tags = Tags(emptyList()),
-                    assignee = Assignee.DINO,
-                ),
-                status = TaskStatus.TO_DO
-            )
-        )
+        state.addTask { KanbanTask(
+            data = TaskData(
+                title = Title("title"),
+                content = "",
+                tags = Tags(emptyList()),
+                assignee = Assignee.DINO,
+            ),
+            status = TaskStatus.TO_DO
+        ) }
 
         // then : 칸반 보드에서 입력된 카드가 보여야 한다
         onNodeWithText("title", useUnmergedTree = true).assertExists()
@@ -108,7 +106,7 @@ class BoardUiTest {
         }
 
         // when : 생성 다이얼로그에서 정상적인 값을 입력 후 생성 버튼을 누를 때
-        state.addTask(
+        state.addTask {
             KanbanTask(
                 data = TaskData(
                     title = Title("제목"),
@@ -117,8 +115,7 @@ class BoardUiTest {
                     assignee = Assignee.DINO,
                 ),
                 status = TaskStatus.TO_DO
-            )
-        )
+        )}
 
         // then : 칸반 보드 하단에 스낵바가 출력되어야 한다
         onNodeWithText(SnackBarText.CREATE_TASK, useUnmergedTree = true).assertExists()
