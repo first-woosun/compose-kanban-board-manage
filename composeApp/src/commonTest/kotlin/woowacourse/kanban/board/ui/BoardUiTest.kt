@@ -350,4 +350,35 @@ class BoardUiTest {
         onNodeWithText(SnackBarText.DELETE_TASK).assertExists()
         onNodeWithText("제목", useUnmergedTree = true).assertDoesNotExist()
     }
+
+    @Test
+    fun `REVIEW 상태인 태스크를 삭제하면 삭제 불가능 스낵바가 표시된다`() = runComposeUiTest {
+        // given : KanbanBoard가 생성된다
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(unDeletableTaskProject) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = unDeletableTaskProject,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        // when : 태스크 카드를 클릭한 후 삭제 버튼을 누르면
+        onNodeWithText("REVIEW", useUnmergedTree = true).assertExists().performClick()
+        waitForIdle()
+        onNodeWithText("삭제", useUnmergedTree = true).assertExists().performClick()
+        waitForIdle()
+
+        // then : 스낵바가 출력되고 태스크가 제거된다
+        onNodeWithText(SnackBarText.INVALID_DELETE_TASK).assertExists()
+        onNodeWithText("REVIEW", useUnmergedTree = true).assertExists()
+    }
 }
