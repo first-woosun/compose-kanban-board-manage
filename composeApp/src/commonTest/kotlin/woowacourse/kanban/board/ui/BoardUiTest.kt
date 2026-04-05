@@ -288,4 +288,35 @@ class BoardUiTest {
         // then : 담당자 없음 버튼이 표시되지 않는다
         onNodeWithText("없음", useUnmergedTree = true).assertDoesNotExist()
     }
+
+    @Test
+    fun `TODO 상태인 태스크를 삭제하면 태스크가 삭제되며 스낵바가 출력된다`() = runComposeUiTest {
+        // given : KanbanBoard가 생성된다
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(todoTaskProject) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = todoTaskProject,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        // when : 태스크 카드를 클릭한 후 삭제 버튼을 누르면
+        onNodeWithText("제목", useUnmergedTree = true).assertExists().performClick()
+        waitForIdle()
+        onNodeWithText("삭제", useUnmergedTree = true).assertExists().performClick()
+        waitForIdle()
+
+        // then : 스낵바가 출력되고 태스크가 제거된다
+        onNodeWithText(SnackBarText.DELETE_TASK).assertExists()
+        onNodeWithText("제목", useUnmergedTree = true).assertDoesNotExist()
+    }
 }
