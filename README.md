@@ -97,6 +97,6 @@ Done
   - [] 담당자 없음 상태로 DONE 태스크를 생성할 수 없다
   - [] 담당자가 지정되지 않은 상태로 Todo 태스크의 상태를 변경할 수 없다
 
-- [] KanbanCardTest
-  - [] assignee가 NONE이면 담당자가 표시되지 않는다
-  - [] assignee가 NONE이 아니면 담당자가 표시된다
+- [x] KanbanCardTest
+  - [x] assignee가 NONE이면 담당자가 표시되지 않는다
+  - [x] assignee가 NONE이 아니면 담당자가 표시된다
