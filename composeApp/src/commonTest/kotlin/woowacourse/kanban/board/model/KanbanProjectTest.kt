@@ -1,12 +1,10 @@
 package woowacourse.kanban.board.model
 
-import androidx.compose.material3.AssistChip
 import kotlin.test.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertThrows
 import org.junit.Test
-import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.domain.project.IllegalDeleteException
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
@@ -39,16 +37,17 @@ class KanbanProjectTest {
     @Test
     fun `태스크의 상태를 변경 할 수 있어야 한다`() = runTest {
         val project = KanbanProject(
-            listOf(KanbanTask(
+            listOf(
+                KanbanTask(
                     data = TaskData(
-                    title = Title("제목"),
-                    content = "내용",
-                    tags = Tags(),
-                    assignee = Assignee.DINO
+                        title = Title("제목"),
+                        content = "내용",
+                        tags = Tags(),
+                        assignee = Assignee.DINO,
+                    ),
+                    status = TaskStatus.IN_PROGRESS,
                 ),
-                status = TaskStatus.IN_PROGRESS,
-                )
-            )
+            ),
         )
 
         project.changeTaskStatus(0, TaskStatus.REVIEW)
@@ -66,7 +65,7 @@ class KanbanProjectTest {
                 tags = Tags(),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         )
 
         val project = KanbanProject(listOf(task))
@@ -88,7 +87,7 @@ class KanbanProjectTest {
                 tags = Tags(),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.IN_PROGRESS
+            status = TaskStatus.IN_PROGRESS,
         )
 
         val project = KanbanProject(listOf(task))
@@ -110,11 +109,11 @@ class KanbanProjectTest {
                 tags = Tags(),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.REVIEW
+            status = TaskStatus.REVIEW,
         )
 
         val project = KanbanProject(
-            listOf(task)
+            listOf(task),
         )
 
         // when: REVIEW상태인 태스크를 삭제하면
@@ -132,11 +131,11 @@ class KanbanProjectTest {
                 tags = Tags(),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.DONE
+            status = TaskStatus.DONE,
         )
 
         val project = KanbanProject(
-            listOf(task)
+            listOf(task),
         )
 
         // when: DONE상태인 태스크를 삭제하면

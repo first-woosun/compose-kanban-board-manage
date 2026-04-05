@@ -9,7 +9,6 @@ import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
-import kotlin.test.assertEquals
 
 class KanbanTaskTest {
 
@@ -23,7 +22,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         )
 
         // when: 새로운 데이터가 입력됐을 때
@@ -48,7 +47,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         )
 
         // when: 태스크의 상태를 IN_PROGRESS로 변경했을 때
@@ -68,7 +67,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때
@@ -88,7 +87,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때
@@ -108,7 +107,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.IN_PROGRESS
+            status = TaskStatus.IN_PROGRESS,
         )
 
         // when: 태스크의 상태를 TO_DO로 변경했을 때
@@ -128,7 +127,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.IN_PROGRESS
+            status = TaskStatus.IN_PROGRESS,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때
@@ -148,7 +147,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.IN_PROGRESS
+            status = TaskStatus.IN_PROGRESS,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때
@@ -168,7 +167,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.REVIEW
+            status = TaskStatus.REVIEW,
         )
 
         // when: 태스크의 상태를 TO_DO로 변경했을 때
@@ -188,7 +187,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.REVIEW
+            status = TaskStatus.REVIEW,
         )
 
         // when: 태스크의 상태를 IN_PROGRESS로 변경했을 때
@@ -208,7 +207,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.REVIEW
+            status = TaskStatus.REVIEW,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때
@@ -228,7 +227,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.DONE
+            status = TaskStatus.DONE,
         )
 
         // when: 태스크의 상태를 TO_DO로 변경했을 때
@@ -248,7 +247,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.DONE
+            status = TaskStatus.DONE,
         )
 
         // when: 태스크의 상태를 IN_PROGRESS로 변경했을 때
@@ -268,7 +267,7 @@ class KanbanTaskTest {
                 tags = Tags(emptyList()),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.DONE
+            status = TaskStatus.DONE,
         )
 
         // when: 태스크의 상태를 REVIEW로 변경했을 때

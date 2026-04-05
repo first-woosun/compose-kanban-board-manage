@@ -41,7 +41,7 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
     }
 
     fun deleteTask(targetId: UUID) {
-        if(!getTaskWithID(targetId).isDeletable) {
+        if (!getTaskWithID(targetId).isDeletable) {
             throw IllegalDeleteException()
         }
         _project.removeAt(getTaskIndexWithId(targetId))

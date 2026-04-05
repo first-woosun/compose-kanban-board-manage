@@ -72,7 +72,7 @@ fun CoachButton(
             ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if(assignee != Assignee.NONE){
+            if (assignee != Assignee.NONE) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = "코치 프로필 아이콘",

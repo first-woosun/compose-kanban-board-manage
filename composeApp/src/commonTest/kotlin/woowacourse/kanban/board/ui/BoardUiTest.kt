@@ -10,8 +10,9 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
-import woowacourse.kanban.board.BoardState
+import java.util.UUID
 import kotlin.test.Test
+import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.board.components.KanbanBoard
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
@@ -22,7 +23,6 @@ import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
-import java.util.UUID
 
 @OptIn(ExperimentalTestApi::class)
 class BoardUiTest {
@@ -40,7 +40,7 @@ class BoardUiTest {
                 ),
                 status = TaskStatus.TO_DO,
             ),
-        )
+        ),
     )
 
     val inProgressTaskProject = KanbanProject(
@@ -56,7 +56,7 @@ class BoardUiTest {
                 ),
                 status = TaskStatus.IN_PROGRESS,
             ),
-        )
+        ),
     )
 
     val unDeletableTaskProject = KanbanProject(
@@ -82,7 +82,7 @@ class BoardUiTest {
                 ),
                 status = TaskStatus.DONE,
             ),
-        )
+        ),
     )
 
     @Test
@@ -124,15 +124,17 @@ class BoardUiTest {
         }
 
         // when: 새로운 태스크가 생성됐을 때
-        state.addTask { KanbanTask(
-            data = TaskData(
-                title = Title("title"),
-                content = "",
-                tags = Tags(emptyList()),
-                assignee = Assignee.DINO,
-            ),
-            status = TaskStatus.TO_DO
-        ) }
+        state.addTask {
+            KanbanTask(
+                data = TaskData(
+                    title = Title("title"),
+                    content = "",
+                    tags = Tags(emptyList()),
+                    assignee = Assignee.DINO,
+                ),
+                status = TaskStatus.TO_DO,
+            )
+        }
 
         // then : 칸반 보드에서 입력된 카드가 보여야 한다
         onNodeWithText("title", useUnmergedTree = true).assertExists()
@@ -169,8 +171,9 @@ class BoardUiTest {
                     tags = Tags(emptyList()),
                     assignee = Assignee.DINO,
                 ),
-                status = TaskStatus.TO_DO
-        )}
+                status = TaskStatus.TO_DO,
+            )
+        }
 
         // then : 칸반 보드 하단에 스낵바가 출력되어야 한다
         onNodeWithText(SnackBarText.CREATE_TASK, useUnmergedTree = true).assertExists()
@@ -418,7 +421,7 @@ class BoardUiTest {
         // given: KanbanBoard에서 새 태스크 생성 버튼을 클릭한다
         val project = KanbanProject(
             title = "Compose1",
-            inputTasks = mutableListOf()
+            inputTasks = mutableListOf(),
         )
 
         lateinit var state: BoardState
@@ -449,7 +452,7 @@ class BoardUiTest {
                     tags = Tags(),
                     assignee = Assignee.NONE,
                 ),
-                status = TaskStatus.TO_DO
+                status = TaskStatus.TO_DO,
             )
         }
         state.toggleDialog()
@@ -493,7 +496,7 @@ class BoardUiTest {
                     tags = Tags(),
                     assignee = Assignee.NONE,
                 ),
-                status = TaskStatus.IN_PROGRESS
+                status = TaskStatus.IN_PROGRESS,
             )
         }
         state.toggleDialog()
@@ -537,7 +540,7 @@ class BoardUiTest {
                     tags = Tags(),
                     assignee = Assignee.NONE,
                 ),
-                status = TaskStatus.REVIEW
+                status = TaskStatus.REVIEW,
             )
         }
         state.toggleDialog()
@@ -581,7 +584,7 @@ class BoardUiTest {
                     tags = Tags(),
                     assignee = Assignee.NONE,
                 ),
-                status = TaskStatus.DONE
+                status = TaskStatus.DONE,
             )
         }
         state.toggleDialog()
@@ -607,7 +610,7 @@ class BoardUiTest {
                     ),
                     status = TaskStatus.TO_DO,
                 ),
-            )
+            ),
         )
 
         lateinit var state: BoardState

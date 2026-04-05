@@ -8,11 +8,11 @@ interface TaskRules {
     val requireAssignee: Boolean
 }
 
-class Todo: TaskRules {
+class Todo : TaskRules {
     override val isDeletable: Boolean = true
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
-        return when(targetStatus) {
+        return when (targetStatus) {
             TaskStatus.TO_DO -> this
             TaskStatus.IN_PROGRESS -> InProgress()
             TaskStatus.REVIEW, TaskStatus.DONE -> throw IllegalStateException()
@@ -22,11 +22,11 @@ class Todo: TaskRules {
     override val requireAssignee: Boolean = false
 }
 
-class InProgress: TaskRules {
+class InProgress : TaskRules {
     override val isDeletable: Boolean = true
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
-        return when(targetStatus) {
+        return when (targetStatus) {
             TaskStatus.IN_PROGRESS -> this
             TaskStatus.TO_DO -> Todo()
             TaskStatus.REVIEW -> Review()
@@ -37,11 +37,11 @@ class InProgress: TaskRules {
     override val requireAssignee: Boolean = true
 }
 
-class Review: TaskRules {
+class Review : TaskRules {
     override val isDeletable: Boolean = false
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
-        return when(targetStatus) {
+        return when (targetStatus) {
             TaskStatus.REVIEW -> this
             TaskStatus.IN_PROGRESS -> InProgress()
             TaskStatus.DONE -> Done()
@@ -52,11 +52,11 @@ class Review: TaskRules {
     override val requireAssignee: Boolean = true
 }
 
-class Done: TaskRules {
+class Done : TaskRules {
     override val isDeletable: Boolean = false
 
     override fun moveTo(targetStatus: TaskStatus): TaskRules {
-        return when(targetStatus) {
+        return when (targetStatus) {
             TaskStatus.DONE -> this
             TaskStatus.TO_DO -> Todo()
             TaskStatus.REVIEW, TaskStatus.IN_PROGRESS -> throw IllegalStateException()

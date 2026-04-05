@@ -18,6 +18,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import java.util.UUID
 import woowacourse.kanban.board.BoardState
 import woowacourse.kanban.dialog.create.TaskCreateDialog
 import woowacourse.kanban.dialog.edit.TaskEditDialog
@@ -25,7 +26,6 @@ import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.Assignee
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
-import java.util.UUID
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -117,10 +117,9 @@ fun KanbanBoard(
                 onDeleteTask = { state.deleteTask(clickedTaskId!!) },
                 onEditTask = { taskCreator ->
                     state.editTask(clickedTaskId!!, taskCreator)
-
                 },
-                assignees = if(state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries
-                            else Assignee.entries - Assignee.NONE,
+                assignees = if (state.getTaskWithId(clickedTaskId!!).status == TaskStatus.TO_DO) Assignee.entries
+                else Assignee.entries - Assignee.NONE,
             )
         } else {
             TaskCreateDialog(

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.core.design.Colors
 
 @Composable
-fun DialogBar(text: String ,modifier: Modifier = Modifier) {
+fun DialogBar(text: String, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -35,12 +35,12 @@ fun DialogBar(text: String ,modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun NewDialogBarPreview(){
+fun NewDialogBarPreview() {
     DialogBar("새 태스크 생성")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun EditDialogBarPreview(){
+fun EditDialogBarPreview() {
     DialogBar("기존 태스크 수정")
 }

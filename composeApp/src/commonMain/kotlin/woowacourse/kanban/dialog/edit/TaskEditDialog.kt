@@ -37,10 +37,12 @@ fun TaskEditDialog(
     modifier: Modifier = Modifier,
     assignees: List<Assignee> = emptyList(),
 ) {
-    val state = remember { TaskEditState(
-        task = targetTask,
-        assignees = assignees
-    ) }
+    val state = remember {
+        TaskEditState(
+            task = targetTask,
+            assignees = assignees,
+        )
+    }
 
     Dialog(
         onDismissRequest = {
@@ -130,7 +132,7 @@ fun TaskEditDialog(
                         if (isError.not()) {
                             onEditTask {
                                 state.taskCreate(
-                                    assignee = assignees[state.selectedAssigneeIndex]
+                                    assignee = assignees[state.selectedAssigneeIndex],
                                 )
                             }
                             onDismiss()
@@ -151,15 +153,15 @@ fun TodoTaskEditDialogPreview() {
             data = TaskData(
                 title = Title("제목"),
                 content = "",
-                tags = Tags(listOf("1","2","3")),
+                tags = Tags(listOf("1", "2", "3")),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.REVIEW
+            status = TaskStatus.REVIEW,
         ),
         onDismiss = { },
         onDeleteTask = { },
         onEditTask = { },
-        assignees = Assignee.entries
+        assignees = Assignee.entries,
     )
 }
 
@@ -171,14 +173,14 @@ fun TaskEditDialogPreview() {
             data = TaskData(
                 title = Title("제목"),
                 content = "",
-                tags = Tags(listOf("1","2","3")),
+                tags = Tags(listOf("1", "2", "3")),
                 assignee = Assignee.DINO,
             ),
-            status = TaskStatus.TO_DO
+            status = TaskStatus.TO_DO,
         ),
         onDismiss = { },
         onDeleteTask = { },
         onEditTask = { },
-        assignees = listOf(Assignee.DINO, Assignee.FAMES)
+        assignees = listOf(Assignee.DINO, Assignee.FAMES),
     )
 }

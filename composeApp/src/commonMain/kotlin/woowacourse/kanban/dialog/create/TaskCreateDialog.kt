@@ -118,7 +118,7 @@ fun TaskCreateDialog(
                         if (isError.not()) {
                             onCreateTask {
                                 state.taskCreate(
-                                    assignee = assignees[state.selectedAssigneeIndex]
+                                    assignee = assignees[state.selectedAssigneeIndex],
                                 )
                             }
                             onDismiss()
@@ -137,6 +137,6 @@ fun TaskCreateDialogPreview() {
     TaskCreateDialog(
         onDismiss = { },
         onCreateTask = { },
-        assignees = Assignee.entries
+        assignees = Assignee.entries,
     )
 }

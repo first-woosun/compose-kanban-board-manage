@@ -12,10 +12,7 @@ import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
 
-class TaskEditState(
-    task: KanbanTask,
-    assignees: List<Assignee>
-    ) {
+class TaskEditState(task: KanbanTask, assignees: List<Assignee>) {
     var titleInputValue by mutableStateOf(task.data.title.content)
         private set
     var contentInputValue by mutableStateOf(task.data.content)
