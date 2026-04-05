@@ -588,4 +588,49 @@ class BoardUiTest {
         onNodeWithText("새 태스크").assertDoesNotExist()
         onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
     }
+
+    @Test
+    fun `담당자가 지정되지 않은 상태로 Todo 태스크의 상태를 변경할 수 없다`() = runComposeUiTest {
+        val project = KanbanProject(
+            title = "Compose1",
+            inputTasks = mutableListOf(
+                KanbanTask(
+                    data = TaskData(
+                        title = Title("제목"),
+                        content = "내용",
+                        tags = Tags(),
+                        assignee = Assignee.NONE,
+                        id = UUID.randomUUID(),
+                    ),
+                    status = TaskStatus.TO_DO,
+                ),
+            )
+        )
+
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(project) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = project,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        onNodeWithText("제목", useUnmergedTree = true).assertExists().performClick()
+        waitForIdle()
+        state.changeTaskStatus(0, TaskStatus.IN_PROGRESS)
+        state.toggleDialog()
+        state.toggleEditTask()
+        waitForIdle()
+
+        onNodeWithText(SnackBarText.NONE_ASSIGNEE_MOVE, useUnmergedTree = true).assertExists()
+    }
 }
