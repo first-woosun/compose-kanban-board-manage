@@ -416,7 +416,10 @@ class BoardUiTest {
     @Test
     fun `담당자 없음 상태로 TODO 태스크를 생성할 수 있다`() = runComposeUiTest {
         // given: KanbanBoard에서 새 태스크 생성 버튼을 클릭한다
-        val project = MockData.MOCK_PROJECTS.first()
+        val project = KanbanProject(
+            title = "Compose1",
+            inputTasks = mutableListOf()
+        )
 
         lateinit var state: BoardState
         lateinit var snackbarHostState: SnackbarHostState
