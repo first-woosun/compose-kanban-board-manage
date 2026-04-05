@@ -500,4 +500,48 @@ class BoardUiTest {
         onNodeWithText("새 태스크").assertDoesNotExist()
         onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
     }
+
+    @Test
+    fun `담당자 없음 상태로 REVIEW 태스크를 생성할 수 없다`() = runComposeUiTest {
+        // given: KanbanBoard에서 새 태스크 생성 버튼을 클릭한다
+        val project = MockData.MOCK_PROJECTS.first()
+
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(project) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = project,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+        onNodeWithText("새 태스크 생성").assertExists().performClick()
+        waitForIdle()
+
+        // when: 담당자 없음을 선택하고 REVIEW상태를 선택한 후 생성 버튼을 클릭하면
+        state.addTask {
+            KanbanTask(
+                data = TaskData(
+                    title = Title("새 태스크"),
+                    content = "",
+                    tags = Tags(),
+                    assignee = Assignee.NONE,
+                ),
+                status = TaskStatus.REVIEW
+            )
+        }
+        state.toggleDialog()
+        waitForIdle()
+
+        // then: 태스크가 생성되고 생성 스낵바가 출력된다
+        onNodeWithText("새 태스크").assertDoesNotExist()
+        onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
+    }
 }
