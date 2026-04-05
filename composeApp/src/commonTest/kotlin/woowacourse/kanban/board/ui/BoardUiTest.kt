@@ -1,6 +1,5 @@
 package woowacourse.kanban.board.ui
 
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -10,13 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.BoardState
 import kotlin.test.Test
 import woowacourse.kanban.board.components.KanbanBoard
-import woowacourse.kanban.board.components.KanbanSnackBar
 import woowacourse.kanban.board.constant.MockData
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.domain.project.KanbanProject
@@ -26,9 +22,68 @@ import woowacourse.kanban.domain.task.Tags
 import woowacourse.kanban.domain.task.TaskData
 import woowacourse.kanban.domain.task.TaskStatus
 import woowacourse.kanban.domain.task.Title
+import java.util.UUID
 
 @OptIn(ExperimentalTestApi::class)
 class BoardUiTest {
+
+    val todoTaskProject = KanbanProject(
+        title = "Compose1",
+        inputTasks = mutableListOf(
+            KanbanTask(
+                data = TaskData(
+                    title = Title("제목"),
+                    content = "내용",
+                    tags = Tags(),
+                    assignee = Assignee.DINO,
+                    id = UUID.randomUUID(),
+                ),
+                status = TaskStatus.TO_DO,
+            ),
+        )
+    )
+
+    val inProgressTaskProject = KanbanProject(
+        title = "Compose1",
+        inputTasks = mutableListOf(
+            KanbanTask(
+                data = TaskData(
+                    title = Title("제목"),
+                    content = "내용",
+                    tags = Tags(),
+                    assignee = Assignee.DINO,
+                    id = UUID.randomUUID(),
+                ),
+                status = TaskStatus.IN_PROGRESS,
+            ),
+        )
+    )
+
+    val unDeletableTaskProject = KanbanProject(
+        title = "Compose1",
+        inputTasks = mutableListOf(
+            KanbanTask(
+                data = TaskData(
+                    title = Title("REVIEW"),
+                    content = "내용",
+                    tags = Tags(),
+                    assignee = Assignee.DINO,
+                    id = UUID.randomUUID(),
+                ),
+                status = TaskStatus.REVIEW,
+            ),
+            KanbanTask(
+                data = TaskData(
+                    title = Title("DONE"),
+                    content = "내용",
+                    tags = Tags(),
+                    assignee = Assignee.DINO,
+                    id = UUID.randomUUID(),
+                ),
+                status = TaskStatus.DONE,
+            ),
+        )
+    )
 
     @Test
     fun `새 태스크 생성 버튼을 누르면 생성 다이얼로그가 열려야 한다`() = runComposeUiTest {
@@ -119,5 +174,33 @@ class BoardUiTest {
 
         // then : 칸반 보드 하단에 스낵바가 출력되어야 한다
         onNodeWithText(SnackBarText.CREATE_TASK, useUnmergedTree = true).assertExists()
+    }
+
+    @Test
+    fun `태스크 카드를 클릭하면 TaskEditDialog가 출력되어야 한다`() = runComposeUiTest {
+        // given : KanbanBoard가 생성된다
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(todoTaskProject) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = todoTaskProject,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        // when : 태스크 카드를 클릭하면
+        onNodeWithText("제목", useUnmergedTree = true).performClick()
+        waitForIdle()
+
+        // then : EditTaskDialog가 출력된다.
+        onNodeWithText("기존 태스크 수정", useUnmergedTree = true).assertExists()
     }
 }
