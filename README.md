@@ -82,7 +82,7 @@ Done
 
 ## UI 테스트 시나리오
 
-- [] BoardUiTest 
+- [x] BoardUiTest 
   - [x] 태스크 카드를 클릭하면 TaskEditDialog가 출력되어야 한다
   - [x] TaskEditDialog에는 '삭제', '수정' 버튼이 출력되어야 한다
   - [x] TODO 상태의 태스크를 클릭하면 다이얼로그에 담당자 없음이 표시된다
