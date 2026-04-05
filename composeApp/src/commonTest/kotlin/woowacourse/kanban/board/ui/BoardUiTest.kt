@@ -203,4 +203,33 @@ class BoardUiTest {
         // then : EditTaskDialog가 출력된다.
         onNodeWithText("기존 태스크 수정", useUnmergedTree = true).assertExists()
     }
+
+    @Test
+    fun `TaskEditDialog에는 '삭제', '수정' 버튼이 출력되어야 한다`() = runComposeUiTest {
+        // given : KanbanBoard가 생성된다
+        lateinit var state: BoardState
+        lateinit var snackbarHostState: SnackbarHostState
+
+        setContent {
+            snackbarHostState = remember { SnackbarHostState() }
+            state = remember { BoardState(todoTaskProject) }
+
+            Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+                KanbanBoard(
+                    project = todoTaskProject,
+                    boardState = state,
+                    snackbarHostState = snackbarHostState,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+        }
+
+        // when : 태스크 카드를 클릭하면
+        onNodeWithText("제목", useUnmergedTree = true).performClick()
+        waitForIdle()
+
+        // then : EditTaskDialog가 출력된다.
+        onNodeWithText("삭제", useUnmergedTree = true).assertExists()
+        onNodeWithText("수정", useUnmergedTree = true).assertExists()
+    }
 }
