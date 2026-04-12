@@ -32,7 +32,7 @@ class BoardUiTest {
 
     val todoTaskProject = KanbanProject(
         title = "Compose1",
-        inputTasks = mutableListOf(
+        tasks = mutableListOf(
             KanbanTask(
                 data = TaskData(
                     title = Title("제목"),
@@ -48,7 +48,7 @@ class BoardUiTest {
 
     val inProgressTaskProject = KanbanProject(
         title = "Compose1",
-        inputTasks = mutableListOf(
+        tasks = mutableListOf(
             KanbanTask(
                 data = TaskData(
                     title = Title("제목"),
@@ -64,7 +64,7 @@ class BoardUiTest {
 
     val unDeletableTaskProject = KanbanProject(
         title = "Compose1",
-        inputTasks = mutableListOf(
+        tasks = mutableListOf(
             KanbanTask(
                 data = TaskData(
                     title = Title("REVIEW"),
@@ -119,7 +119,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -152,7 +151,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -184,7 +182,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = todoTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -212,7 +209,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = todoTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -241,7 +237,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = todoTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -269,7 +264,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = inProgressTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -297,7 +291,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = todoTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -328,7 +321,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = inProgressTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -359,7 +351,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = unDeletableTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -390,7 +381,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = unDeletableTaskProject,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -413,7 +403,7 @@ class BoardUiTest {
         // given: KanbanBoard에서 새 태스크 생성 버튼을 클릭한다
         val project = KanbanProject(
             title = "Compose1",
-            inputTasks = mutableListOf(),
+            tasks = emptyList<KanbanTask>(),
         )
 
         lateinit var state: BoardState
@@ -426,7 +416,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -463,7 +452,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -502,7 +490,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -524,28 +511,21 @@ class BoardUiTest {
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
         onNodeWithText("태스크제목").assertDoesNotExist()
         onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
-
-        // then: 태스크가 생성되고 생성 스낵바가 출력된다
-        onNodeWithText("새 태스크").assertDoesNotExist()
-        onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
     }
 
     @Test
     fun `담당자 없음 상태로 DONE 태스크를 생성할 수 없다`() = runComposeUiTest {
         // given: KanbanBoard에서 새 태스크 생성 버튼을 클릭한다
         val project = MockData.MOCK_PROJECTS.first()
-
         lateinit var state: BoardState
         lateinit var snackbarHostState: SnackbarHostState
 
         setContent {
             snackbarHostState = remember { SnackbarHostState() }
-            state = remember { BoardState(project) }
 
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
@@ -567,17 +547,13 @@ class BoardUiTest {
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
         onNodeWithText("태스크제목").assertDoesNotExist()
         onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
-
-        // then: 태스크가 생성되고 생성 스낵바가 출력된다
-        onNodeWithText("새 태스크").assertDoesNotExist()
-        onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
     }
 
     @Test
     fun `담당자가 지정되지 않은 상태로 Todo 태스크의 상태를 변경할 수 없다`() = runComposeUiTest {
         val project = KanbanProject(
             title = "Compose1",
-            inputTasks = mutableListOf(
+            tasks = listOf(
                 KanbanTask(
                     data = TaskData(
                         title = Title("제목"),
@@ -601,7 +577,6 @@ class BoardUiTest {
             Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
                 KanbanBoard(
                     project = project,
-                    boardState = state,
                     snackbarHostState = snackbarHostState,
                     modifier = Modifier.padding(paddingValues),
                 )
