@@ -107,6 +107,6 @@ class KanbanPageUiTest {
         state.changeTaskStatus(0, TaskStatus.IN_PROGRESS)
 
         // then : "태스크가 이동되었습니다" 스낵바가 출력되어야 한다.
-        onNodeWithText(SnackBarText.EDIT_TASK, useUnmergedTree = true).assertExists()
+        onNodeWithText(SnackBarText.MOVE_TASK, useUnmergedTree = true).assertExists()
     }
 }
