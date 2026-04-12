@@ -10,9 +10,8 @@ import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
 
-class BoardState(project: KanbanProject) {
-
-    private val totalTasks = mutableStateOf(project)
+class BoardState(inputProject: KanbanProject) {
+    val project = mutableStateOf(inputProject)
 
     private val showDialog = mutableStateOf(false)
 
@@ -38,12 +37,12 @@ class BoardState(project: KanbanProject) {
     }
 
     fun getTaskWithId(targetId: UUID): KanbanTask {
-        return totalTasks.value.getTaskWithID(targetId)
+        return project.value.getTaskWithID(targetId)
     }
 
     fun addTask(inputTask: () -> KanbanTask) {
         try {
-            totalTasks.value.addTask(inputTask())
+            project.value = project.value.addTask(inputTask())
             snackBarTrigger(SnackBarText.CREATE_TASK)
         } catch (e: IllegalArgumentException) {
             snackBarTrigger(SnackBarText.NONE_ASSIGNEE)
@@ -52,7 +51,7 @@ class BoardState(project: KanbanProject) {
 
     fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus) {
         try {
-            totalTasks.value.changeTaskStatus(targetIndex, targetStatus)
+            project.value = project.value.changeTaskStatus(targetIndex, targetStatus)
             snackBarTrigger(SnackBarText.MOVE_TASK)
         } catch (e: IllegalStateException) {
             snackBarTrigger(SnackBarText.INVALID_MOVE_TASK)
@@ -62,17 +61,19 @@ class BoardState(project: KanbanProject) {
     }
 
     fun deleteTask(targetId: UUID) {
-        val deletedResult = totalTasks.value.deleteTask(targetId)
-        if (!deletedResult) {
+        val isDeletable = project.value.getTaskWithID(targetId).isDeletable
+        if (!isDeletable) {
             snackBarTrigger(SnackBarText.INVALID_DELETE_TASK)
             return
         }
+        project.value = project.value.deleteTask(targetId)
         snackBarTrigger(SnackBarText.DELETE_TASK)
     }
 
-    fun editTask(targetId: UUID, inputTask: () -> KanbanTask) {
+    fun editTask(targetId: UUID, taskCreator: () -> KanbanTask) {
         try {
-            totalTasks.value.editTask(targetId, inputTask)
+            val inputTask = taskCreator()
+            project.value = project.value.editTask(targetId, inputTask)
             snackBarTrigger(SnackBarText.EDIT_TASK)
         } catch (e: IllegalArgumentException) {
             snackBarTrigger(SnackBarText.NONE_ASSIGNEE_MOVE)
