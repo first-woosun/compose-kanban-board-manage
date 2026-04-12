@@ -34,6 +34,37 @@ class KanbanProjectTest {
     }
 
     @Test
+    fun `태스크가 없는 프로젝트의 진행률은 0이다`() = runTest {
+        val project = KanbanProject()
+        assertThat(project.getProgress()).isEqualTo(0.0)
+    }
+
+    @Test
+    fun `완료된 태스크 비율에 따라 진행률이 정확히 계산되어야 한다`() = runTest {
+        val todoTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.NONE,
+            ),
+            status = TaskStatus.TO_DO,
+        )
+        val doneTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.DINO,
+            ),
+            status = TaskStatus.DONE,
+        )
+        val project = KanbanProject(listOf(todoTask, doneTask))
+
+        assertThat(project.getProgress()).isEqualTo(0.5)
+    }
+
+    @Test
     fun `태스크의 상태를 변경 할 수 있어야 한다`() = runTest {
         val project = KanbanProject(
             listOf(
@@ -144,5 +175,71 @@ class KanbanProjectTest {
         // when: DONE상태인 태스크를 삭제하면
         // then: false를 반환한다.
         assertThat(project.deleteTask(task.data.id)).isFalse()
+    }
+
+    @Test
+    fun `id를 통해 task를 반환받을 수 있다` () = runTest {
+        val todoTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.NONE,
+            ),
+            status = TaskStatus.TO_DO,
+        )
+
+        val targetId = todoTask.data.id
+
+        val project = KanbanProject(listOf(todoTask))
+
+        assertThat(project.getTaskWithID(targetId)).isEqualTo(todoTask)
+    }
+
+    @Test
+    fun `id를 통해 task의 index를 반환받을 수 있다` () = runTest {
+        val todoTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.NONE,
+            ),
+            status = TaskStatus.TO_DO,
+        )
+
+        val targetId = todoTask.data.id
+
+        val project = KanbanProject(listOf(todoTask))
+
+        assertThat(project.getTaskIndexWithId(targetId)).isEqualTo(0)
+    }
+
+    @Test
+    fun `상태별로 태스크를 반환받을 수 있다`() = runTest {
+        val todoTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.NONE,
+            ),
+            status = TaskStatus.TO_DO,
+        )
+        val doneTask = KanbanTask(
+            data = TaskData(
+                title = Title("제목"),
+                content = "내용",
+                tags = Tags(),
+                assignee = Assignee.DINO,
+            ),
+            status = TaskStatus.DONE,
+        )
+        val project = KanbanProject(listOf(todoTask, doneTask))
+
+        val todoTasks = project.getTasksWithStatus(TaskStatus.TO_DO)
+
+        assertThat(todoTasks).hasSize(1)
+        assertThat(todoTasks[0].status).isEqualTo(TaskStatus.TO_DO)
     }
 }
