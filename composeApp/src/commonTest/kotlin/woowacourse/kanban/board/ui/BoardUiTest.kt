@@ -7,8 +7,11 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import java.util.UUID
 import kotlin.test.Test
@@ -124,20 +127,14 @@ class BoardUiTest {
         }
 
         // when: 새로운 태스크가 생성됐을 때
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("title"),
-                    content = "",
-                    tags = Tags(emptyList()),
-                    assignee = Assignee.DINO,
-                ),
-                status = TaskStatus.TO_DO,
-            )
-        }
+        onNodeWithText("새 태스크 생성").performClick()
+        waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNodeWithText("생성").performClick()
 
         // then : 칸반 보드에서 입력된 카드가 보여야 한다
-        onNodeWithText("title", useUnmergedTree = true).assertExists()
+        onNodeWithText("태스크제목", useUnmergedTree = true).assertExists()
     }
 
     @Test
@@ -163,17 +160,12 @@ class BoardUiTest {
         }
 
         // when : 생성 다이얼로그에서 정상적인 값을 입력 후 생성 버튼을 누를 때
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("제목"),
-                    content = "",
-                    tags = Tags(emptyList()),
-                    assignee = Assignee.DINO,
-                ),
-                status = TaskStatus.TO_DO,
-            )
-        }
+        onNodeWithText("새 태스크 생성").performClick()
+        waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNodeWithText("생성").performClick()
+        waitForIdle()
 
         // then : 칸반 보드 하단에 스낵바가 출력되어야 한다
         onNodeWithText(SnackBarText.CREATE_TASK, useUnmergedTree = true).assertExists()
@@ -440,26 +432,19 @@ class BoardUiTest {
                 )
             }
         }
-        onNodeWithText("새 태스크 생성").assertExists().performClick()
-        waitForIdle()
 
         // when: 담당자 없음을 선택하고 Todo상태를 선택한 후 생성 버튼을 클릭하면
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("새 태스크"),
-                    content = "",
-                    tags = Tags(),
-                    assignee = Assignee.NONE,
-                ),
-                status = TaskStatus.TO_DO,
-            )
-        }
-        state.toggleDialog()
+        onNodeWithText("새 태스크 생성").performClick()
+        waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNodeWithText("없음").performClick()
+        waitForIdle()
+        onNodeWithText("생성").performClick()
         waitForIdle()
 
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
-        onNodeWithText("새 태스크").assertExists()
+        onNodeWithText("태스크제목").assertExists()
         onNodeWithText(SnackBarText.CREATE_TASK).assertExists()
     }
 
@@ -484,26 +469,21 @@ class BoardUiTest {
                 )
             }
         }
-        onNodeWithText("새 태스크 생성").assertExists().performClick()
-        waitForIdle()
 
         // when: 담당자 없음을 선택하고 IN_PROGRESS상태를 선택한 후 생성 버튼을 클릭하면
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("새 태스크"),
-                    content = "",
-                    tags = Tags(),
-                    assignee = Assignee.NONE,
-                ),
-                status = TaskStatus.IN_PROGRESS,
-            )
-        }
-        state.toggleDialog()
+        onNodeWithText("새 태스크 생성").performClick()
+        waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNode(hasText("In Progress") and hasClickAction()).performClick()
+        waitForIdle()
+        onNodeWithText("없음").performClick()
+        waitForIdle()
+        onNodeWithText("생성").performClick()
         waitForIdle()
 
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
-        onNodeWithText("새 태스크").assertDoesNotExist()
+        onNodeWithText("태스크제목").assertDoesNotExist()
         onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
     }
 
@@ -528,23 +508,22 @@ class BoardUiTest {
                 )
             }
         }
-        onNodeWithText("새 태스크 생성").assertExists().performClick()
-        waitForIdle()
 
         // when: 담당자 없음을 선택하고 REVIEW상태를 선택한 후 생성 버튼을 클릭하면
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("새 태스크"),
-                    content = "",
-                    tags = Tags(),
-                    assignee = Assignee.NONE,
-                ),
-                status = TaskStatus.REVIEW,
-            )
-        }
-        state.toggleDialog()
+        onNodeWithText("새 태스크 생성").performClick()
         waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNode(hasText("Review") and hasClickAction()).performClick()
+        waitForIdle()
+        onNodeWithText("없음").performClick()
+        waitForIdle()
+        onNodeWithText("생성").performClick()
+        waitForIdle()
+
+        // then: 태스크가 생성되고 생성 스낵바가 출력된다
+        onNodeWithText("태스크제목").assertDoesNotExist()
+        onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
 
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
         onNodeWithText("새 태스크").assertDoesNotExist()
@@ -572,23 +551,22 @@ class BoardUiTest {
                 )
             }
         }
-        onNodeWithText("새 태스크 생성").assertExists().performClick()
-        waitForIdle()
 
         // when: 담당자 없음을 선택하고 DONE상태를 선택한 후 생성 버튼을 클릭하면
-        state.addTask {
-            KanbanTask(
-                data = TaskData(
-                    title = Title("새 태스크"),
-                    content = "",
-                    tags = Tags(),
-                    assignee = Assignee.NONE,
-                ),
-                status = TaskStatus.DONE,
-            )
-        }
-        state.toggleDialog()
+        onNodeWithText("새 태스크 생성").performClick()
         waitForIdle()
+        onNodeWithText("태스크 제목을 입력하세요").performTextInput("태스크제목")
+        waitForIdle()
+        onNode(hasText("Done") and hasClickAction()).performClick()
+        waitForIdle()
+        onNodeWithText("없음").performClick()
+        waitForIdle()
+        onNodeWithText("생성").performClick()
+        waitForIdle()
+
+        // then: 태스크가 생성되고 생성 스낵바가 출력된다
+        onNodeWithText("태스크제목").assertDoesNotExist()
+        onNodeWithText(SnackBarText.NONE_ASSIGNEE).assertExists()
 
         // then: 태스크가 생성되고 생성 스낵바가 출력된다
         onNodeWithText("새 태스크").assertDoesNotExist()
@@ -632,9 +610,9 @@ class BoardUiTest {
 
         onNodeWithText("제목", useUnmergedTree = true).assertExists().performClick()
         waitForIdle()
-        state.changeTaskStatus(0, TaskStatus.IN_PROGRESS)
-        state.toggleDialog()
-        state.toggleEditTask()
+        onNode(hasText("In Progress") and hasClickAction()).performClick()
+        waitForIdle()
+        onNode(hasText("수정") and hasClickAction()).performClick()
         waitForIdle()
 
         onNodeWithText(SnackBarText.NONE_ASSIGNEE_MOVE, useUnmergedTree = true).assertExists()
