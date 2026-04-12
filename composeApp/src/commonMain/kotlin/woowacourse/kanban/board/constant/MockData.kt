@@ -14,7 +14,7 @@ object MockData {
     val MOCK_PROJECTS = listOf(
         KanbanProject(
             title = "Compose1",
-            inputTasks = mutableListOf(
+            tasks = mutableListOf(
                 KanbanTask(
                     data = TaskData(
                         title = Title("제목"),
@@ -49,7 +49,7 @@ object MockData {
         ),
         KanbanProject(
             title = "Compose2",
-            inputTasks = mutableListOf(
+            tasks = mutableListOf(
                 KanbanTask(
                     data = TaskData(
                         title = Title("제목"),
@@ -84,7 +84,7 @@ object MockData {
         ),
         KanbanProject(
             title = "compose3 너무너무 길어진 프로젝트 이름",
-            inputTasks = mutableListOf(
+            tasks = mutableListOf(
                 KanbanTask(
                     data = TaskData(
                         title = Title("제목"),
