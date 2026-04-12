@@ -8,36 +8,36 @@ data class KanbanProject(private val tasks: List<KanbanTask> = emptyList(), val 
 
     val projectTasks: List<KanbanTask> get() = tasks
 
-    fun getTasksWithStatus(targetStatus: TaskStatus): List<KanbanTask> = tasks.filter { it.status == targetStatus }
+    fun getTasksWithStatus(status: TaskStatus): List<KanbanTask> = tasks.filter { it.status == status }
 
-    fun getTaskIndexWithId(targetId: UUID) = tasks.indexOfFirst { it.data.id == targetId }
+    fun getTaskIndexWithId(id: UUID) = tasks.indexOfFirst { it.data.id == id }
 
     fun getProgress(): Double {
         return if (tasks.isEmpty()) 0.0 else getTasksWithStatus(TaskStatus.DONE).size.toDouble() / tasks.size.toDouble()
     }
 
-    fun getTaskWithID(targetId: UUID) = tasks.first { it.data.id == targetId }
+    fun getTaskWithID(id: UUID) = tasks.first { it.data.id == id }
 
     fun addTask(inputTask: KanbanTask): KanbanProject {
         return copy(tasks = tasks + inputTask)
     }
 
-    fun changeTaskStatus(targetIndex: Int, targetStatus: TaskStatus): KanbanProject {
+    fun changeTaskStatus(index: Int, status: TaskStatus): KanbanProject {
         val newTasks = tasks.toMutableList()
-        newTasks[targetIndex] = newTasks[targetIndex].changeStatus(targetStatus)
+        newTasks[index] = newTasks[index].changeStatus(status)
         return copy(tasks = newTasks)
     }
 
-    fun editTask(targetId: UUID, inputTask: KanbanTask): KanbanProject {
-        val index = getTaskIndexWithId(targetId)
+    fun editTask(id: UUID, inputTask: KanbanTask): KanbanProject {
+        val index = getTaskIndexWithId(id)
         if (index == -1) return this
         val newTasks = tasks.toMutableList()
         newTasks[index] = inputTask
         return copy(tasks = newTasks)
     }
 
-    fun deleteTask(targetId: UUID): KanbanProject {
-        val index = getTaskIndexWithId(targetId)
+    fun deleteTask(id: UUID): KanbanProject {
+        val index = getTaskIndexWithId(id)
         if (index == -1) return this
         val newTasks = tasks.toMutableList()
         newTasks.removeAt(index)
