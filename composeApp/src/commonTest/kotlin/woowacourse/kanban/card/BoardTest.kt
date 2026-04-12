@@ -44,10 +44,10 @@ class BoardTest {
 
         // when
         // then
-        onNodeWithTag("제목").assertExists()
-        onNodeWithTag("중간내용").assertExists()
-        onNodeWithTag("테그목록").assertExists()
-        onNodeWithTag("프로필").assertExists()
+        onNodeWithTag("제목", useUnmergedTree = true).assertExists()
+        onNodeWithTag("중간내용", useUnmergedTree = true).assertExists()
+        onNodeWithTag("테그목록", useUnmergedTree = true).assertExists()
+        onNodeWithTag("프로필", useUnmergedTree = true).assertExists()
     }
 
     @Test
@@ -61,7 +61,7 @@ class BoardTest {
 
         // when
         // then
-        onNodeWithTag("중간내용").assertDoesNotExist()
+        onNodeWithTag("중간내용", useUnmergedTree = true).assertDoesNotExist()
     }
 
     @Test
@@ -75,7 +75,7 @@ class BoardTest {
 
         // when
         // then
-        onNodeWithTag("테그목록").assertDoesNotExist()
+        onNodeWithTag("테그목록", useUnmergedTree = true).assertDoesNotExist()
     }
 
     @Test
@@ -89,7 +89,7 @@ class BoardTest {
 
         // when
         // then
-        onNodeWithTag("중간내용").assertDoesNotExist()
-        onNodeWithTag("테그목록").assertDoesNotExist()
+        onNodeWithTag("중간내용", useUnmergedTree = true).assertDoesNotExist()
+        onNodeWithTag("테그목록", useUnmergedTree = true).assertDoesNotExist()
     }
 }
