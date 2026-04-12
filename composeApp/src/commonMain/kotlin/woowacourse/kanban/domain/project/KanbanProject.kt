@@ -1,5 +1,6 @@
 package woowacourse.kanban.domain.project
 
+import woowacourse.kanban.board.utils.SnackBarEvent
 import java.util.UUID
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskData
@@ -40,10 +41,12 @@ class KanbanProject(inputTasks: List<KanbanTask> = emptyList(), val title: Strin
         changeTaskData(getTaskIndexWithId(targetId), inputTask().data)
     }
 
-    fun deleteTask(targetId: UUID) {
-        if (!getTaskWithID(targetId).isDeletable) {
-            throw IllegalDeleteException()
-        }
-        _project.removeAt(getTaskIndexWithId(targetId))
+    fun deleteTask(targetId: UUID): Boolean {
+        val targetIndex = getTaskIndexWithId(targetId)
+
+        val task = _project[targetIndex]
+        if (!task.isDeletable) return false
+        _project.removeAt(targetIndex)
+        return true
     }
 }

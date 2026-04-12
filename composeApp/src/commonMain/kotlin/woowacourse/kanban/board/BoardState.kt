@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import java.util.UUID
 import woowacourse.kanban.board.constant.SnackBarText
 import woowacourse.kanban.board.utils.SnackBarEvent
-import woowacourse.kanban.domain.project.IllegalDeleteException
 import woowacourse.kanban.domain.project.KanbanProject
 import woowacourse.kanban.domain.task.KanbanTask
 import woowacourse.kanban.domain.task.TaskStatus
@@ -63,12 +62,12 @@ class BoardState(project: KanbanProject) {
     }
 
     fun deleteTask(targetId: UUID) {
-        try {
-            totalTasks.value.deleteTask(targetId)
-            snackBarTrigger(SnackBarText.DELETE_TASK)
-        } catch (e: IllegalDeleteException) {
+        val deletedResult = totalTasks.value.deleteTask(targetId)
+        if (!deletedResult) {
             snackBarTrigger(SnackBarText.INVALID_DELETE_TASK)
+            return
         }
+        snackBarTrigger(SnackBarText.DELETE_TASK)
     }
 
     fun editTask(targetId: UUID, inputTask: () -> KanbanTask) {
